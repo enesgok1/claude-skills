@@ -67,6 +67,8 @@ Windows PowerShell'de: `Copy-Item "$HOME\.claude\skills\CALISMA-STANDARDI.md" "$
 
   Windows'ta `claude` yerine `~/.vscode/extensions/anthropic.claude-code-*/resources/native-binary/claude.exe` yazılır. Kurulumdan sonra Claude'a `ctx doctor` yazdırarak çalıştığını doğrulayın.
 
+- **Eklentiler varsayılan olarak kapalı:** Eklentileri kurduktan sonra `~/.claude/settings.json` içindeki `enabledPlugins` değerlerinin hepsini `false` yapın. Her projede gereken eklentiler, sahibin onayıyla o projenin `.claude/settings.local.json` dosyasında açılır (çalışma standardı → "Eklenti ve skill seçimi").
+
 **4.** Claude Code'u yeniden başlatın. Standart, skill'ler ve eklenti tüm projelerde geçerli olur.
 
 ## 🔄 Güncel tutmak

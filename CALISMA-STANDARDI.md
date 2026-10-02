@@ -61,6 +61,14 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Durum satırı (2026-10-02): `~/.claude/skills/statusline.mjs`. Model, düşünme seviyesi, bağlam doluluğu ve 5 saatlik/haftalık kullanım hakkını gösterir; yalnızca terminalde görünür.
 - Bu dosya her oturumda yüklenir, kısa tut. Projeye özel ayrıntı projenin CLAUDE.md'sine yazılır.
 
+## Eklenti ve skill seçimi: proje başına, sahip karar verir (2026-10-02)
+- Her eklenti her oturumda token harcar (2026-10-02 ölçümü: 21 eklenti toplam ~14.700 token). Bu yüzden `~/.claude/settings.json`'da **bütün eklentiler kapalı**, isteğe bağlı skill'ler `skillOverrides` ile `"off"`. Açık kalanlar yalnızca standardın zorunlu tuttuğu `turkce-arayuz-metni`, `kvkk-kontrol-listesi` ve `sahip-belgeleri`.
+- **Bir projede ilk oturumda** (ya da `.claude/settings.local.json`'da `enabledPlugins` yoksa) projenin türüne bak ve sahibe listeyle sor: "Bu projede şunlar lazım, açayım mı?" Her birinin işe yararlığını ve token maliyetini yaz. Sahip onaylamadan açma.
+- Önerinin çekirdeği: superpowers, context-mode, context7, commit-commands, code-review, security-guidance (~1.900 token). Türüne göre ekle: Expo → expo, frontend-mobile-development, frontend-mobile-security; web → ui-design, frontend-mobile-development, playwright; sunucu/veritabanı → backend-api-security, database-design; ayrıca javascript-typescript, unit-testing, accessibility-compliance, seo-technical-optimization.
+- Onaylananları projenin `.claude/settings.local.json` dosyasına yaz (`enabledPlugins: {...: true}`, skill'ler için `skillOverrides: {...: "on"}`). Dosyanın git'in dışında kaldığını kontrol et. Sonra yeni oturum gerekir.
+- Bir eklentinin maliyetini ölçmek: `claude.exe plugin details <ad>` ("Always-on" satırı). Bir projede neyin açık olduğunu görmek: proje klasöründe `claude.exe plugin list`.
+- İş sırasında kapalı bir eklenti ya da skill gerekirse sahibe sor, kendiliğinden açma.
+
 ## Öğrenilen dersler (aynı hatayı iki kez yapma)
 - Bir hata yaptığında, sahip seni düzelttiğinde ya da bir şey beklenenden farklı çıktığında dersi **aynı oturumda** tek satırla yaz: tüm projeleri ilgilendiriyorsa buraya, tek projeyi ilgilendiriyorsa o projenin CLAUDE.md'sine. Benzer bir işe başlamadan önce bu listeye bak.
 - Ders kısa olur: ne yanlış gitti → doğrusu ne. Uzun hikâye yazma, liste şişerse eskimiş dersleri sil.
@@ -71,7 +79,7 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Durum satırı (`statusLine`) VS Code sohbet panelinde görünmez, yalnızca terminal modunda görünür (2026-10-02).
 - `ANTHROPIC_BASE_URL` ile başka bir sağlayıcıya (ör. Qwen) geçmek token tasarrufu değildir: veri üçüncü tarafa gider, araç arama ve Remote Control kapanır (2026-10-02).
 
-## context-mode eklentisi (2026-10-02, tüm projelerde)
+## context-mode eklentisi (2026-10-02, açık olduğu projelerde)
 Büyük araç çıktılarını (test, derleme, log, git geçmişi, tarayıcı dökümü, API yanıtı) sohbete dökmek yerine kendi alanında işler ve yalnızca özeti getirir. Kendi kurallarını her oturumun başında kendisi ekler (yaklaşık 1.300 token). Burada yalnızca sahibe özel kurallar var:
 - Düzenlenecek dosya normal `Read` ile okunur. İnceleme ve özet için `ctx_execute_file`, çok çıktı üreten komutlar için `ctx_batch_execute` ya da `ctx_execute` kullan. Test ve derleme sonuçlarını yine sayılarıyla raporla.
 - Web sayfası okuma aracı ve `curl` engellidir: `ctx_fetch_and_index` + `ctx_search` kullan. Kütüphane belgesi için context7 geçerli.
