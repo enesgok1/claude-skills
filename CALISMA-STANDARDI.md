@@ -61,6 +61,16 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Durum satırı (2026-10-02): `~/.claude/skills/statusline.mjs`. Model, düşünme seviyesi, bağlam doluluğu ve 5 saatlik/haftalık kullanım hakkını gösterir; yalnızca terminalde görünür.
 - Bu dosya her oturumda yüklenir, kısa tut. Projeye özel ayrıntı projenin CLAUDE.md'sine yazılır.
 
+## Öğrenilen dersler (aynı hatayı iki kez yapma)
+- Bir hata yaptığında, sahip seni düzelttiğinde ya da bir şey beklenenden farklı çıktığında dersi **aynı oturumda** tek satırla yaz: tüm projeleri ilgilendiriyorsa buraya, tek projeyi ilgilendiriyorsa o projenin CLAUDE.md'sine. Benzer bir işe başlamadan önce bu listeye bak.
+- Ders kısa olur: ne yanlış gitti → doğrusu ne. Uzun hikâye yazma, liste şişerse eskimiş dersleri sil.
+- `/effort xhigh` yazmak oturumluk değil kalıcıdır; oturumluk yükseltme için `/effort` → seç → `s` (2026-10-02).
+- `MAX_THINKING_TOKENS` Opus 5.5'te işe yaramaz; düşünme miktarı yalnızca effort ile ayarlanır (2026-10-02).
+- Videolardaki model fiyatı ve "kaç kat pahalı" oranları eskiyebilir; güncel belgeden doğrula. 2026-10-02'de Haiku 4.5 / Sonnet 5.5 / Opus 5.5 = 1 / 2 / 4 $ (girdi, milyon token).
+- `/plugin` komutları VS Code panelinde çalışmaz; eklentiyi `claude.exe plugin ...` ile kur (2026-10-02).
+- Durum satırı (`statusLine`) VS Code sohbet panelinde görünmez, yalnızca terminal modunda görünür (2026-10-02).
+- `ANTHROPIC_BASE_URL` ile başka bir sağlayıcıya (ör. Qwen) geçmek token tasarrufu değildir: veri üçüncü tarafa gider, araç arama ve Remote Control kapanır (2026-10-02).
+
 ## context-mode eklentisi (2026-10-02, tüm projelerde)
 Büyük araç çıktılarını (test, derleme, log, git geçmişi, tarayıcı dökümü, API yanıtı) sohbete dökmek yerine kendi alanında işler ve yalnızca özeti getirir. Kendi kurallarını her oturumun başında kendisi ekler (yaklaşık 1.300 token). Burada yalnızca sahibe özel kurallar var:
 - Düzenlenecek dosya normal `Read` ile okunur. İnceleme ve özet için `ctx_execute_file`, çok çıktı üreten komutlar için `ctx_batch_execute` ya da `ctx_execute` kullan. Test ve derleme sonuçlarını yine sayılarıyla raporla.
@@ -68,6 +78,7 @@ Büyük araç çıktılarını (test, derleme, log, git geçmişi, tarayıcı d�
 - Playwright araçlarında her zaman `filename` parametresini ver, çıktı dosyaya gitsin.
 - **Sormadan kullanma:** `ctx_insight` (tarayıcı açar, ücretli bir web paneline götürür), `ctx_purge` (bilgi tabanını siler), `ctx_upgrade` (eklentiyi günceller; yeni sürüm kurulmadan önce yeniden incelenir).
 - `%APPDATA%\context-mode\platform.json` dosyasını **asla oluşturma.** Bu dosya varsa eklenti bütün oturum olaylarını dış bir sunucuya gönderir.
+- Eklenti `settings.json`'a kendi onarım kancasını ekler (`~/.claude/hooks/context-mode-cache-heal.mjs`; yalnızca yerel dosya yollarını onarır, ağ yok). Kaldırırken bunu da sil.
 - Sorun çıkarsa `ctx doctor`. Kaldırmak için: `claude.exe plugin uninstall context-mode@context-mode`.
 - Eklentinin kuralları bu dosyayla ya da proje kurallarıyla çelişirse bu dosya ve proje kuralları önce gelir.
 
