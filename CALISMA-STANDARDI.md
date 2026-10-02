@@ -51,7 +51,9 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 
 ## Token tasarrufu (2026-10-02)
 - Opus 5.5'in düşünme seviyesi `high` (`settings.json` → `modelSettings`), sohbet özetleme eşiği %50 (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`). Zor bir işte yalnızca o oturum için yükseltmek: `/effort` yaz, seviyeyi seç, **`s`** tuşuna bas. `/effort xhigh` yazmak ya da Enter'a basmak seçimi kalıcı kaydeder.
-- Konu değişince sahibe yeni oturum açmasını (`/clear`) öner. İlgisiz işleri aynı oturumda biriktirme.
+- Konu değişince sahibe yeni oturum açmasını (`/clear`) öner. İlgisiz işleri aynı oturumda biriktirme. Bir aşama bitince (araştırma bitti, uygulamaya geçiliyor) `/compact` öner.
+- En büyük harcama uzun oturumlarda her mesajda yeniden okunan konuşmadır (2026-10-02: günlük 155 milyon önbellek okuması, çıktının 240 katı). Kısa ve odaklı oturum en büyük tasarruftur.
+- **Kullanımı ölçmek: `claude-usage`** (phuryn/claude-usage, `uv tool` ile kurulu, `~/.local/bin`). `claude-usage scan` ve ardından `today`, `week` ya da `stats`. Tamamen yerel çalışır. `claude-usage dashboard` tarayıcı açar, önce sor. ⚠️ Opus 5.5 fiyatı programın tablosunda yok ve eski Opus fiyatıyla hesaplıyor: dolar tutarı yaklaşık 2 kat yüksek çıkar, token sayıları doğrudur. Abonelikte dolar ödenmez, tutar yalnızca kıyas içindir.
 - Dosyanın tamamını değil gereken kısmını oku: önce ara, sonra oku. Az önce düzenlediğin dosyayı doğrulamak için yeniden okuma.
 - Komutları sessiz ya da kısa çıktı veren seçeneklerle çalıştır: `npm install --silent`, `pip install -q`, `git log --oneline -n 5`, `git status -s`, testlerde yalnızca özet ve başarısız olanlar. Komut hata verirse yalnızca o komutu ayrıntılı çıktıyla yeniden çalıştır.
 - Uzun çıktıyı sahibe aynen aktarma, kısa bir öz çıkar: ne oldu, sonuç sayıları, sahibin karar vermesi gereken şey. Aynı bilgiyi tekrar etme, gereksiz giriş ve kapanış cümlesi yazma.
@@ -62,8 +64,9 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Bu dosya her oturumda yüklenir, kısa tut. Projeye özel ayrıntı projenin CLAUDE.md'sine yazılır.
 
 ## Eklenti ve skill seçimi: proje başına, sahip karar verir (2026-10-02)
-- Her eklenti her oturumda token harcar (2026-10-02 ölçümü: 21 eklenti toplam ~14.700 token). Bu yüzden `~/.claude/settings.json`'da **bütün eklentiler kapalı**, isteğe bağlı skill'ler `skillOverrides` ile `"off"`. Açık kalanlar yalnızca standardın zorunlu tuttuğu `turkce-arayuz-metni`, `kvkk-kontrol-listesi` ve `sahip-belgeleri`.
-- **Bir projede ilk oturumda** (ya da `.claude/settings.local.json`'da `enabledPlugins` yoksa) projenin türüne bak ve sahibe listeyle sor: "Bu projede şunlar lazım, açayım mı?" Her birinin işe yararlığını ve token maliyetini yaz. Sahip onaylamadan açma.
+- Her eklenti her oturumda token harcar (2026-10-02 ölçümü: 21 eklenti toplam ~14.700 token). Bu yüzden `~/.claude/settings.json`'da eklentiler kapalı, isteğe bağlı skill'ler `skillOverrides` ile `"off"`.
+- **Her yerde açık olanlar (sormadan):** token tasarrufu sağlayanlar, yani context-mode eklentisi ve claude-usage aracı, ayrıca standardın zorunlu tuttuğu `turkce-arayuz-metni`, `kvkk-kontrol-listesi`, `sahip-belgeleri` skill'leri.
+- **Bir projeye başlarken** (ya da `.claude/settings.local.json`'da `enabledPlugins` yoksa) işe başlamadan önce projenin türüne bak ve sahiple birlikte seç: önerdiklerini işe yararlıkları ve token maliyetleriyle listele, "Bunları açayım mı?" diye sor. Sahip onaylamadan açma.
 - Önerinin çekirdeği: superpowers, context-mode, context7, commit-commands, code-review, security-guidance (~1.900 token). Türüne göre ekle: Expo → expo, frontend-mobile-development, frontend-mobile-security; web → ui-design, frontend-mobile-development, playwright; sunucu/veritabanı → backend-api-security, database-design; ayrıca javascript-typescript, unit-testing, accessibility-compliance, seo-technical-optimization.
 - Onaylananları projenin `.claude/settings.local.json` dosyasına yaz (`enabledPlugins: {...: true}`, skill'ler için `skillOverrides: {...: "on"}`). Dosyanın git'in dışında kaldığını kontrol et. Sonra yeni oturum gerekir.
 - Bir eklentinin maliyetini ölçmek: `claude.exe plugin details <ad>` ("Always-on" satırı). Bir projede neyin açık olduğunu görmek: proje klasöründe `claude.exe plugin list`.
@@ -77,9 +80,11 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Videolardaki model fiyatı ve "kaç kat pahalı" oranları eskiyebilir; güncel belgeden doğrula. 2026-10-02'de Haiku 4.5 / Sonnet 5.5 / Opus 5.5 = 1 / 2 / 4 $ (girdi, milyon token).
 - `/plugin` komutları VS Code panelinde çalışmaz; eklentiyi `claude.exe plugin ...` ile kur (2026-10-02).
 - Durum satırı (`statusLine`) VS Code sohbet panelinde görünmez, yalnızca terminal modunda görünür (2026-10-02).
+- Dış kaynaklı skill'ler kendi kütüphane tercihlerini dayatabilir (ör. ECC `react-native-patterns`: TanStack, NativeWind, Expo SDK 55). Eklemeden önce projenin `package.json`'ıyla karşılaştır; uymuyorsa alma (2026-10-02).
+- Toplu paketler (ör. ECC: 293 skill, 68 ajan) bütün olarak kurulmaz; liste yükü tasarrufu yok eder. Yalnızca gereken parça incelenip alınır (2026-10-02).
 - `ANTHROPIC_BASE_URL` ile başka bir sağlayıcıya (ör. Qwen) geçmek token tasarrufu değildir: veri üçüncü tarafa gider, araç arama ve Remote Control kapanır (2026-10-02).
 
-## context-mode eklentisi (2026-10-02, açık olduğu projelerde)
+## context-mode eklentisi (2026-10-02, tüm projelerde)
 Büyük araç çıktılarını (test, derleme, log, git geçmişi, tarayıcı dökümü, API yanıtı) sohbete dökmek yerine kendi alanında işler ve yalnızca özeti getirir. Kendi kurallarını her oturumun başında kendisi ekler (yaklaşık 1.300 token). Burada yalnızca sahibe özel kurallar var:
 - Düzenlenecek dosya normal `Read` ile okunur. İnceleme ve özet için `ctx_execute_file`, çok çıktı üreten komutlar için `ctx_batch_execute` ya da `ctx_execute` kullan. Test ve derleme sonuçlarını yine sayılarıyla raporla.
 - Web sayfası okuma aracı ve `curl` engellidir: `ctx_fetch_and_index` + `ctx_search` kullan. Kütüphane belgesi için context7 geçerli.
