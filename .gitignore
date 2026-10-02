@@ -10,3 +10,6 @@
 !/turkce-arayuz-metni/
 !/kvkk-kontrol-listesi/
 !/sahip-belgeleri/
+
+# Claude Code status line used by ~/.claude/settings.json
+!/statusline.mjs

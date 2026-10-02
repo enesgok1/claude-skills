@@ -52,8 +52,11 @@ Windows PowerShell'de: `Copy-Item "$HOME\.claude\skills\CALISMA-STANDARDI.md" "$
 
   ```json
   "env": { "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50" },
-  "modelSettings": { "claude-opus-5-5": { "effortLevel": "high" } }
+  "modelSettings": { "claude-opus-5-5": { "effortLevel": "high" } },
+  "statusLine": { "type": "command", "command": "node \"C:/Users/<kullanıcı>/.claude/skills/statusline.mjs\"" }
   ```
+
+  `statusLine`, bu depodaki [`statusline.mjs`](../statusline.mjs) betiğiyle terminalin altında Türkçe bir durum satırı gösterir: model ve düşünme seviyesi, bağlam doluluğu, 5 saatlik ve haftalık kullanım hakkı, git dalı. Yolda ters bölü değil `/` kullanın. Durum satırı yalnızca terminalde görünür, VS Code'un sohbet panelinde görünmez.
 
 - context-mode eklentisini kurun ([mksglu/context-mode](https://github.com/mksglu/context-mode)). Terminal sürümünde `/plugin` komutlarıyla, VS Code'da eklentinin içindeki `claude.exe` ile:
 

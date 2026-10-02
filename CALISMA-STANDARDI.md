@@ -56,6 +56,7 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Alt ajanı (subagent) yalnızca sahip isterse kullan. Her biri sıfırdan başlar ve küçük işte pahalıya gelir.
 - Oturum ortasında model değiştirmeyi önerme. Önbellek modele özeldir, değiştirince bütün konuşma tam fiyatla yeniden işlenir. Daha ucuz model gerekirse `opusplan` seçeneğini anlat (planlamada Opus, uygulamada Sonnet).
 - Model fiyatı, sınırı ya da özelliği sorulursa ezberden değil güncel belgeden yanıtla (`claude-api` skill'i, code.claude.com/docs).
+- Durum satırı (2026-10-02): `~/.claude/skills/statusline.mjs`. Model, düşünme seviyesi, bağlam doluluğu ve 5 saatlik/haftalık kullanım hakkını gösterir; yalnızca terminalde görünür.
 - Bu dosya her oturumda yüklenir, kısa tut. Projeye özel ayrıntı projenin CLAUDE.md'sine yazılır.
 
 ## context-mode eklentisi (2026-10-02, tüm projelerde)
