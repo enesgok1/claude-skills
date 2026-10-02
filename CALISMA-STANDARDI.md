@@ -83,6 +83,8 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Dış kaynaklı skill'ler kendi kütüphane tercihlerini dayatabilir (ör. ECC `react-native-patterns`: TanStack, NativeWind, Expo SDK 55). Eklemeden önce projenin `package.json`'ıyla karşılaştır; uymuyorsa alma (2026-10-02).
 - Toplu paketler (ör. ECC: 293 skill, 68 ajan) bütün olarak kurulmaz; liste yükü tasarrufu yok eder. Yalnızca gereken parça incelenip alınır (2026-10-02).
 - `ANTHROPIC_BASE_URL` ile başka bir sağlayıcıya (ör. Qwen) geçmek token tasarrufu değildir: veri üçüncü tarafa gider, araç arama ve Remote Control kapanır (2026-10-02).
+- Windows'ta `chrome.exe --version` sürüm basmaz, sahibin açık Chrome'una "yeni pencere aç" gönderir. Chrome'u yalnızca `--headless=new` ve ayrı `--user-data-dir` ile çalıştır; sürüm gerekiyorsa dosya bilgisinden oku (2026-10-02).
+- Chrome 149'da CDP ağ kısıtlaması `127.0.0.1` adresine uygulanmıyor, `localhost`'a uygulanıyor. Hız ölçümü `localhost` ile yapılır (2026-10-02).
 
 ## context-mode eklentisi (2026-10-02, tüm projelerde)
 Büyük araç çıktılarını (test, derleme, log, git geçmişi, tarayıcı dökümü, API yanıtı) sohbete dökmek yerine kendi alanında işler ve yalnızca özeti getirir. Kendi kurallarını her oturumun başında kendisi ekler (yaklaşık 1.300 token). Burada yalnızca sahibe özel kurallar var:
