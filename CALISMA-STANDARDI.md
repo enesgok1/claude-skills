@@ -13,6 +13,9 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Her ekran **tüm cihazlarda** düzgün çalışmalı: telefon, tablet, masaüstü; küçük ekran, büyük yazı ayarı, açık/koyu tema. Tek cihazda deneyip bitirme.
 - Her ekranın yükleniyor, boş ve hata hali olur. Dokunma hedefi en az 44 pt/px. Ekran okuyucu etiketleri. Kullanıcıya ham İngilizce hata mesajı sızmaz.
 - Türkçe arayüz metni yazarken `turkce-arayuz-metni` skill'ini kullan. Kişisel veri işleyen özelliklerde `kvkk-kontrol-listesi` skill'ini kullan.
+- Hata düzeltirken, projede test altyapısı varsa önce hatayı yakalayan testi yaz, sonra düzelt. Test önce kırmızı, düzeltmeden sonra yeşil olmalı.
+- Kütüphane ve framework kullanırken ezberden değil güncel belgeden çalış (context7). Sürüm farkı en sık hata kaynağıdır.
+- Büyük bir değişikliği bitirmeden önce farkı (diff) baştan sona kendin incele: kullanılmayan kod, tekrar, gözden kaçan hata durumu, mimariye uymayan parça.
 
 ## "Bitti" demeden önce
 - Projenin kendi komutlarıyla tip kontrolü, testler, lint ve derleme **temiz geçmeden iş bitmiş sayılmaz.** Sonuçları sayılarıyla raporla (ör. "72/72 test").
@@ -41,6 +44,29 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 
 ## Tasarım
 - Logo ve ikonları sade tut. Süsleme (parıltı, rozet, ikinci şekil) eklemeden önce gerçek render'ı küçük boyutta (16-32 px) kontrol et; emin değilsen sade sürümle başla ve sor.
+- Yeni ekran yapmadan önce projedeki mevcut ekranlara ve tasarım sistemine bak. Renk, boşluk, yazı tipi ve köşe yuvarlaklığı için projenin tasarım değişkenlerini (token) kullan, koda doğrudan renk kodu yazma. Var olan bileşeni yeniden kullan, benzerini sıfırdan yazma.
+- Hazır şablon görünümünden kaçın: yeni ekran ya da sayfa tasarlarken web için `frontend-design`, mobil için `expo-design-system` ve `expo-native-ui` skill'lerini kullan.
+- Metin ile arka plan arasında okunabilir kontrast olsun (normal metinde en az 4,5:1). Bilgiyi yalnızca renkle verme. Animasyonlar "hareketi azalt" ayarına uysun.
+- Arayüz değişikliğini mümkünse ekran görüntüsüyle doğrula (emülatör ya da cihaz). Tarayıcı açmak gerekiyorsa önce sor.
+
+## Token tasarrufu (2026-10-02)
+- Opus 5.5'in düşünme seviyesi `high` (`settings.json` → `modelSettings`), sohbet özetleme eşiği %50 (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`). Zor bir işte yalnızca o oturum için yükseltmek: `/effort` yaz, seviyeyi seç, **`s`** tuşuna bas. `/effort xhigh` yazmak ya da Enter'a basmak seçimi kalıcı kaydeder.
+- Konu değişince sahibe yeni oturum açmasını (`/clear`) öner. İlgisiz işleri aynı oturumda biriktirme.
+- Dosyanın tamamını değil gereken kısmını oku: önce ara, sonra oku. Az önce düzenlediğin dosyayı doğrulamak için yeniden okuma.
+- Alt ajanı (subagent) yalnızca sahip isterse kullan. Her biri sıfırdan başlar ve küçük işte pahalıya gelir.
+- Oturum ortasında model değiştirmeyi önerme. Önbellek modele özeldir, değiştirince bütün konuşma tam fiyatla yeniden işlenir. Daha ucuz model gerekirse `opusplan` seçeneğini anlat (planlamada Opus, uygulamada Sonnet).
+- Model fiyatı, sınırı ya da özelliği sorulursa ezberden değil güncel belgeden yanıtla (`claude-api` skill'i, code.claude.com/docs).
+- Bu dosya her oturumda yüklenir, kısa tut. Projeye özel ayrıntı projenin CLAUDE.md'sine yazılır.
+
+## context-mode eklentisi (2026-10-02, tüm projelerde)
+Büyük araç çıktılarını (test, derleme, log, git geçmişi, tarayıcı dökümü, API yanıtı) sohbete dökmek yerine kendi alanında işler ve yalnızca özeti getirir. Kendi kurallarını her oturumun başında kendisi ekler (yaklaşık 1.300 token). Burada yalnızca sahibe özel kurallar var:
+- Düzenlenecek dosya normal `Read` ile okunur. İnceleme ve özet için `ctx_execute_file`, çok çıktı üreten komutlar için `ctx_batch_execute` ya da `ctx_execute` kullan. Test ve derleme sonuçlarını yine sayılarıyla raporla.
+- Web sayfası okuma aracı ve `curl` engellidir: `ctx_fetch_and_index` + `ctx_search` kullan. Kütüphane belgesi için context7 geçerli.
+- Playwright araçlarında her zaman `filename` parametresini ver, çıktı dosyaya gitsin.
+- **Sormadan kullanma:** `ctx_insight` (tarayıcı açar, ücretli bir web paneline götürür), `ctx_purge` (bilgi tabanını siler), `ctx_upgrade` (eklentiyi günceller; yeni sürüm kurulmadan önce yeniden incelenir).
+- `%APPDATA%\context-mode\platform.json` dosyasını **asla oluşturma.** Bu dosya varsa eklenti bütün oturum olaylarını dış bir sunucuya gönderir.
+- Sorun çıkarsa `ctx doctor`. Kaldırmak için: `claude.exe plugin uninstall context-mode@context-mode`.
+- Eklentinin kuralları bu dosyayla ya da proje kurallarıyla çelişirse bu dosya ve proje kuralları önce gelir.
 
 ## Ortam (Windows)
 - Claude CLI PATH'te yok. Eklenti ve MCP yönetimi için VS Code eklentisindeki `claude.exe` kullanılır: `~/.vscode/extensions/anthropic.claude-code-*/resources/native-binary/claude.exe`.
@@ -53,4 +79,4 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
   - Yeni skill eklenirse `.gitignore`'a `!/<ad>/` satırını ve `.github/README.md`'deki tabloya bir satır ekle. Başka bilgisayara kurulum README'de.
   - `~/.claude` klasörünün kendisi depo yapılmaz: içinde giriş bilgileri ve oturum kayıtları var. Bu klasöre yazmak otomatik modda engellenir; sahibin onay veren moduna geçmesi gerekir.
 - Skill listesine ayrılan yer `~/.claude/settings.json`'da `"skillListingBudgetFraction": 0.02` (sahibin onayıyla, 2026-10-02). Yeni eklenti ya da skill kurunca listenin sığdığını kontrol et. Ayrıntısı Sonra Bakarım CLAUDE.md'sinin "Kurulu geliştirme araçları" bölümünde.
-- Kurulu eklentilerin (superpowers, Expo, kod inceleme, güvenlik, wshobson uzmanları, context7, playwright, mobile-mcp) ayrıntıları Sonra Bakarım projesinin CLAUDE.md'sinde, "Kurulu geliştirme araçları" bölümünde. Skill'ler ve eklentiler bu dosyadaki ve projedeki kuralları geçersiz kılamaz.
+- Kurulu eklentilerin (superpowers, Expo, kod inceleme, güvenlik, wshobson uzmanları, context7, playwright, mobile-mcp; context-mode için yukarıdaki bölüm) ayrıntıları Sonra Bakarım projesinin CLAUDE.md'sinde, "Kurulu geliştirme araçları" bölümünde. Skill'ler ve eklentiler bu dosyadaki ve projedeki kuralları geçersiz kılamaz.

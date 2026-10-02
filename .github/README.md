@@ -4,7 +4,7 @@ Claude Code'un tüm projelerde kullandığı kişisel çalışma standardı ve T
 
 | Dosya | Ne işe yarar |
 |---|---|
-| [`CALISMA-STANDARDI.md`](../CALISMA-STANDARDI.md) | Sahibin tüm projelerdeki çalışma kuralları: iletişim, kalite çıtası, doğrulama, git ve push onayı, güvenlik, belgeler. Bilgisayarda `~/.claude/CLAUDE.md` olarak durur. |
+| [`CALISMA-STANDARDI.md`](../CALISMA-STANDARDI.md) | Sahibin tüm projelerdeki çalışma kuralları: iletişim, kalite çıtası, doğrulama, git ve push onayı, güvenlik, belgeler, tasarım, token tasarrufu ve context-mode eklentisi. Bilgisayarda `~/.claude/CLAUDE.md` olarak durur. |
 | [`turkce-arayuz-metni`](../turkce-arayuz-metni/SKILL.md) | Doğal Türkçe arayüz metni: ton, düğme ve hata mesajları, dinamik değerlere ek getirme ("Trendyol'dan", "PTT'ye", "3'te"), `tr-TR` büyük/küçük harf, para ve tarih biçimleri |
 | [`kvkk-kontrol-listesi`](../kvkk-kontrol-listesi/SKILL.md) | Kişisel veri işleyen özellikler için KVKK ve İYS mühendislik kontrol listesi. Hukuki görüş değildir. |
 | [`sahip-belgeleri`](../sahip-belgeleri/SKILL.md) | Kod yazmayan ürün sahibi için yol haritası, emojili yapılacaklar listesi ve proje CLAUDE.md'si düzeni |
@@ -46,7 +46,25 @@ cp ~/.claude/skills/CALISMA-STANDARDI.md ~/.claude/CLAUDE.md
 
 Windows PowerShell'de: `Copy-Item "$HOME\.claude\skills\CALISMA-STANDARDI.md" "$HOME\.claude\CLAUDE.md"`
 
-**3.** Claude Code'u yeniden başlatın. Standart ve skill'ler tüm projelerde geçerli olur.
+**3. Token tasarrufu ayarları ve context-mode eklentisi.** Çalışma standardının "Token tasarrufu" ve "context-mode eklentisi" bölümleri bunlara dayanır.
+
+- `~/.claude/settings.json` dosyasına şunları ekleyin (dosyada başka ayarlar varsa silmeden yanlarına):
+
+  ```json
+  "env": { "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50" },
+  "modelSettings": { "claude-opus-5-5": { "effortLevel": "high" } }
+  ```
+
+- context-mode eklentisini kurun ([mksglu/context-mode](https://github.com/mksglu/context-mode)). Terminal sürümünde `/plugin` komutlarıyla, VS Code'da eklentinin içindeki `claude.exe` ile:
+
+  ```bash
+  claude plugin marketplace add mksglu/context-mode
+  claude plugin install context-mode@context-mode
+  ```
+
+  Windows'ta `claude` yerine `~/.vscode/extensions/anthropic.claude-code-*/resources/native-binary/claude.exe` yazılır. Kurulumdan sonra Claude'a `ctx doctor` yazdırarak çalıştığını doğrulayın.
+
+**4.** Claude Code'u yeniden başlatın. Standart, skill'ler ve eklenti tüm projelerde geçerli olur.
 
 ## 🔄 Güncel tutmak
 
