@@ -1,22 +1,26 @@
-# 🧰 Claude Skill'leri
+# 🧰 Claude Skill'leri ve Çalışma Standardı
 
-Claude Code'un tüm projelerde kullandığı, Türkiye'ye yönelik uygulama ve sitelerde işe yarayan skill'ler. Claude yazdı; Sonra Bakarım ve sevgilify projelerinde kullanılıyor.
+Claude Code'un tüm projelerde kullandığı kişisel çalışma standardı ve Türkiye'ye yönelik uygulama ve sitelerde işe yarayan skill'ler. Claude yazdı; Sonra Bakarım ve sevgilify projelerinde kullanılıyor.
 
-| Skill | Ne işe yarar |
+| Dosya | Ne işe yarar |
 |---|---|
+| [`CALISMA-STANDARDI.md`](../CALISMA-STANDARDI.md) | Sahibin tüm projelerdeki çalışma kuralları: iletişim, kalite çıtası, doğrulama, git ve push onayı, güvenlik, belgeler. Bilgisayarda `~/.claude/CLAUDE.md` olarak durur. |
 | [`turkce-arayuz-metni`](../turkce-arayuz-metni/SKILL.md) | Doğal Türkçe arayüz metni: ton, düğme ve hata mesajları, dinamik değerlere ek getirme ("Trendyol'dan", "PTT'ye", "3'te"), `tr-TR` büyük/küçük harf, para ve tarih biçimleri |
 | [`kvkk-kontrol-listesi`](../kvkk-kontrol-listesi/SKILL.md) | Kişisel veri işleyen özellikler için KVKK ve İYS mühendislik kontrol listesi. Hukuki görüş değildir. |
 | [`sahip-belgeleri`](../sahip-belgeleri/SKILL.md) | Kod yazmayan ürün sahibi için yol haritası, emojili yapılacaklar listesi ve proje CLAUDE.md'si düzeni |
 
 ## 📁 Nasıl çalışır
 
-Bu depo doğrudan bilgisayardaki `~/.claude/skills/` klasörüdür. Claude Code bu klasördeki skill'leri her projede kullanır.
+- **Skill'ler:** Bu depo doğrudan bilgisayardaki `~/.claude/skills/` klasörüdür. Claude Code bu klasördeki skill'leri her projede kullanır. Klasörde başka kaynaklardan kurulan skill'ler de durur (frontend-design, ui-ux-pro-max, claude.ai'den eşitlenenler); `.gitignore` onları dışarıda bırakır, yalnızca yukarıdaki dosyaları depoya alır.
+- **Çalışma standardı:** Claude Code standardı `~/.claude/CLAUDE.md`'den okur. Bu depoda kopyası durur: `CALISMA-STANDARDI.md`. `~/.claude` klasörünün kendisi depo yapılmaz, çünkü içinde giriş bilgileri ve oturum kayıtları var.
 
-Klasörde başka kaynaklardan kurulan skill'ler de durur (frontend-design, ui-ux-pro-max, claude.ai'den eşitlenenler). `.gitignore` her şeyi dışarıda bırakır, yalnızca yukarıdaki üç skill'i depoya alır. Bu yüzden bir skill düzenlenince ayrı bir kopyayı güncellemek gerekmez: commit ve push yeter.
+## 💻 Yeni bir bilgisayara kurmak
 
-## 💻 Başka bir bilgisayara kurmak
+En kolayı: Claude Code'u kurup GitHub'a giriş yaptıktan sonra Claude'a **"github.com/hayrigok/claude-skills deposunu README'ye göre kur"** yazmak. Depo özel olduğu için bilgisayarda GitHub hesabıyla giriş yapılmış olmalı (`gh auth login` ya da ilk `git clone`'da açılan giriş penceresi).
 
-`~/.claude/skills/` klasörü henüz yoksa:
+Elle kurmak için:
+
+**1. Skill'ler.** `~/.claude/skills/` klasörü henüz yoksa:
 
 ```bash
 git clone https://github.com/hayrigok/claude-skills.git ~/.claude/skills
@@ -34,7 +38,35 @@ git branch --set-upstream-to=origin/main
 
 ⚠️ Klasörde bu depodaki skill'lerle aynı adlı bir klasör varsa `git pull` durur. Önce o klasörü silin ya da yeniden adlandırın.
 
-Kurulumdan sonra Claude Code'u yeniden başlatın. Skill'ler tüm projelerde görünür.
+**2. Çalışma standardı.** Kopyayı Claude Code'un okuduğu yere koyun. O bilgisayarda zaten bir `~/.claude/CLAUDE.md` varsa önce yedekleyin, çünkü üstüne yazılır.
+
+```bash
+cp ~/.claude/skills/CALISMA-STANDARDI.md ~/.claude/CLAUDE.md
+```
+
+Windows PowerShell'de: `Copy-Item "$HOME\.claude\skills\CALISMA-STANDARDI.md" "$HOME\.claude\CLAUDE.md"`
+
+**3.** Claude Code'u yeniden başlatın. Standart ve skill'ler tüm projelerde geçerli olur.
+
+## 🔄 Güncel tutmak
+
+**Bir bilgisayarda değişiklik yapınca:**
+
+```bash
+cp ~/.claude/CLAUDE.md ~/.claude/skills/CALISMA-STANDARDI.md   # standart değiştiyse
+cd ~/.claude/skills
+git add -A
+git commit -m "<ne değişti>"
+git push
+```
+
+**Öbür bilgisayarda değişiklikleri almak:**
+
+```bash
+cd ~/.claude/skills
+git pull
+cp ~/.claude/skills/CALISMA-STANDARDI.md ~/.claude/CLAUDE.md
+```
 
 ## 📦 Tek bir projeye eklemek
 

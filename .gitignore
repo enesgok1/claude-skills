@@ -4,6 +4,8 @@
 /*
 !/.gitignore
 !/.github/
+# Copy of ~/.claude/CLAUDE.md (the owner's working standard for all projects)
+!/CALISMA-STANDARDI.md
 
 !/turkce-arayuz-metni/
 !/kvkk-kontrol-listesi/
