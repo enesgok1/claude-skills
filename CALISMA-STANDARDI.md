@@ -53,6 +53,8 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Opus 5.5'in düşünme seviyesi `high` (`settings.json` → `modelSettings`), sohbet özetleme eşiği %50 (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`). Zor bir işte yalnızca o oturum için yükseltmek: `/effort` yaz, seviyeyi seç, **`s`** tuşuna bas. `/effort xhigh` yazmak ya da Enter'a basmak seçimi kalıcı kaydeder.
 - Konu değişince sahibe yeni oturum açmasını (`/clear`) öner. İlgisiz işleri aynı oturumda biriktirme.
 - Dosyanın tamamını değil gereken kısmını oku: önce ara, sonra oku. Az önce düzenlediğin dosyayı doğrulamak için yeniden okuma.
+- Komutları sessiz ya da kısa çıktı veren seçeneklerle çalıştır: `npm install --silent`, `pip install -q`, `git log --oneline -n 5`, `git status -s`, testlerde yalnızca özet ve başarısız olanlar. Komut hata verirse yalnızca o komutu ayrıntılı çıktıyla yeniden çalıştır.
+- Uzun çıktıyı sahibe aynen aktarma, kısa bir öz çıkar: ne oldu, sonuç sayıları, sahibin karar vermesi gereken şey. Aynı bilgiyi tekrar etme, gereksiz giriş ve kapanış cümlesi yazma.
 - Alt ajanı (subagent) yalnızca sahip isterse kullan. Her biri sıfırdan başlar ve küçük işte pahalıya gelir.
 - Oturum ortasında model değiştirmeyi önerme. Önbellek modele özeldir, değiştirince bütün konuşma tam fiyatla yeniden işlenir. Daha ucuz model gerekirse `opusplan` seçeneğini anlat (planlamada Opus, uygulamada Sonnet).
 - Model fiyatı, sınırı ya da özelliği sorulursa ezberden değil güncel belgeden yanıtla (`claude-api` skill'i, code.claude.com/docs).
