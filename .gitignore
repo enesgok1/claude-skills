@@ -1,0 +1,10 @@
+# This folder also holds skills installed from other sources (frontend-design,
+# ui-ux-pro-max, the claude.ai "synced" folder, ...). Ignore everything and
+# whitelist only the skills that belong to this repository.
+/*
+!/.gitignore
+!/.github/
+
+!/turkce-arayuz-metni/
+!/kvkk-kontrol-listesi/
+!/sahip-belgeleri/
