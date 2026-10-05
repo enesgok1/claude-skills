@@ -7,6 +7,7 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Uzun listeler ve planlar okunaklı olsun: kısa başlıklar, maddeler, uygun yerde emoji.
 - **Dürüst rapor:** Doğrulanmayanı doğrulanmış gibi sunma. Test geçmediyse çıktısıyla söyle, atlanan adımı söyle.
 - Belirsiz bir istekte en makul yorumu seç ve söyle. Sahibin vermesi gereken gerçek bir karar varsa önerinle birlikte sor.
+- **Fikirleri tek tek ve kısa sun:** ne olduğu + kime ne faydası + maliyeti varsa o + "istersen ekleriz". Sahip seçer, seçtiği plana girer (2026-10-05).
 
 ## Kalite standardı (her görevde, hatırlatılmadan)
 - **Kıdemli yazılımcı kalitesi:** Kusursuz kod ve kullanıcı deneyimi. Mevcut mimariyi bozma.
