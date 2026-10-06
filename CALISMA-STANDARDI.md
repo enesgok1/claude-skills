@@ -68,7 +68,7 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Her eklenti her oturumda token harcar (2026-10-02 ölçümü: 21 eklenti toplam ~14.700 token). Bu yüzden `~/.claude/settings.json`'da eklentiler kapalı, isteğe bağlı skill'ler `skillOverrides` ile `"off"`.
 - **Her yerde açık olanlar (sormadan):** token tasarrufu sağlayanlar, yani context-mode eklentisi ve claude-usage aracı, ayrıca standardın zorunlu tuttuğu `turkce-arayuz-metni`, `kvkk-kontrol-listesi`, `sahip-belgeleri` skill'leri.
 - **Bir projeye başlarken** (ya da `.claude/settings.local.json`'da `enabledPlugins` yoksa) işe başlamadan önce projenin türüne bak ve sahiple birlikte seç: önerdiklerini işe yararlıkları ve token maliyetleriyle listele, "Bunları açayım mı?" diye sor. Sahip onaylamadan açma.
-- Önerinin çekirdeği: superpowers, context-mode, context7, commit-commands, code-review, security-guidance (~1.900 token). Türüne göre ekle: Expo → expo, frontend-mobile-development, frontend-mobile-security; web → ui-design, frontend-mobile-development, playwright; sunucu/veritabanı → backend-api-security, database-design; ayrıca javascript-typescript, unit-testing, accessibility-compliance, seo-technical-optimization.
+- Önerinin çekirdeği: superpowers, context-mode, context7, commit-commands, code-review, security-guidance (~1.900 token). Türüne göre ekle: Expo → expo, frontend-mobile-development, frontend-mobile-security; web → ui-design, frontend-mobile-development, playwright ve `frontend-design` + `ui-ux-pro-max` skill'leri; sunucu/veritabanı → backend-api-security, database-design; ayrıca javascript-typescript, unit-testing, accessibility-compliance, seo-technical-optimization.
 - Onaylananları projenin `.claude/settings.local.json` dosyasına yaz (`enabledPlugins: {...: true}`, skill'ler için `skillOverrides: {...: "on"}`). Dosyanın git'in dışında kaldığını kontrol et. Sonra yeni oturum gerekir.
 - Bir eklentinin maliyetini ölçmek: `claude.exe plugin details <ad>` ("Always-on" satırı). Bir projede neyin açık olduğunu görmek: proje klasöründe `claude.exe plugin list`.
 - İş sırasında kapalı bir eklenti ya da skill gerekirse sahibe sor, kendiliğinden açma.
@@ -87,6 +87,7 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Windows'ta `chrome.exe --version` sürüm basmaz, sahibin açık Chrome'una "yeni pencere aç" gönderir. Chrome'u yalnızca `--headless=new` ve ayrı `--user-data-dir` ile çalıştır; sürüm gerekiyorsa dosya bilgisinden oku (2026-10-02).
 - Chrome 149'da CDP ağ kısıtlaması `127.0.0.1` adresine uygulanmıyor, `localhost`'a uygulanıyor. Hız ölçümü `localhost` ile yapılır (2026-10-02).
 - context-mode kabuk komutunun başına `NODE_OPTIONS=...` ekliyor; komut `for`/`if`/`while` ile başlarsa sözdizimi hatası verir. Önce sıradan bir komut koy (`cd klasör && for ...`) (2026-10-04).
+- Ekranı olan projede eklenti önerisine kapalı duran tasarım skill'lerini (`ui-ux-pro-max`, `frontend-design`) de koy; Servis Takip'te unutuldu, sahip sordu (2026-10-06).
 
 ## context-mode eklentisi (2026-10-02, tüm projelerde)
 Büyük araç çıktılarını (test, derleme, log, git geçmişi, tarayıcı dökümü, API yanıtı) sohbete dökmek yerine kendi alanında işler ve yalnızca özeti getirir. Kendi kurallarını her oturumun başında kendisi ekler (yaklaşık 1.300 token). Burada yalnızca sahibe özel kurallar var:
