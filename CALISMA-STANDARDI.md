@@ -97,6 +97,8 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - Bash'te çift tırnaklı `node -e "…"` içine ters tırnak (Markdown kodu, şablon dizgesi) yazılırsa kabuk onu komut olarak çalıştırmaya kalkar (2026-10-07'de `npm run dev` denendi). Ters tırnak ya da `${…}` içeren metin Edit aracıyla ya da önce dosyaya yazılan bir betikle değiştirilir (2026-10-07).
 - Git Bash'in PATH'indeki `tar` GNU tar'dır: zip açamaz, `D:\…` yolunu uzak makine sanar. Betiklerde Windows'ta `%SystemRoot%\System32\tar.exe` (bsdtar) çağrılır (2026-10-12).
 - Bir ölçüyü ölçmeden yazma: "3-4 kat tasarruf" tahmini gerçek dosyada %25-50 çıktı. Kod açıklamasına ve belgeye ölçülen sayı yazılır (2026-10-12).
+- Ters tırnak ya da `${…}` içeren betik tırnaklı heredoc (`<<'EOF'`) ile de yazılamıyor: bu ortamda kabuk "unexpected EOF" verip hiçbir şeyi çalıştırmıyor (iki kez oldu). Betik Write aracıyla dosyaya yazılır, sonra çalıştırılır; küçük değişiklikte Edit aracı (2026-10-12).
+- Görsel bileşende "öğe var mı" değil "kullanıcı görüyor mu" sınanır: Playwright `toBeVisible` üst öğesi tarafından tamamen kırpılmış öğede de geçer, `toBeInViewport` kırpılmayı hesaba katar. Üçüncü taraf stil dosyası (ör. MapLibre) kendi kutusunun konumlandırmasını ezip sıfır yükseklik bırakabilir; ekran görüntüsüne gerçek içerikle gözle bakılır (Servis Takip'te harita ilk hâlinde hiç görünmüyordu, 2026-10-12).
 
 ## context-mode eklentisi (2026-10-02, tüm projelerde)
 Büyük araç çıktılarını (test, derleme, log, git geçmişi, tarayıcı dökümü, API yanıtı) sohbete dökmek yerine kendi alanında işler ve yalnızca özeti getirir. Kendi kurallarını her oturumun başında kendisi ekler (yaklaşık 1.300 token). Burada yalnızca sahibe özel kurallar var:
