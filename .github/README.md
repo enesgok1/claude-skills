@@ -16,14 +16,14 @@ Claude Code'un tüm projelerde kullandığı kişisel çalışma standardı ve T
 
 ## 💻 Yeni bir bilgisayara kurmak
 
-En kolayı: Claude Code'u kurup GitHub'a giriş yaptıktan sonra Claude'a **"github.com/hayrigok/claude-skills deposunu README'ye göre kur"** yazmak. Depo özel olduğu için bilgisayarda GitHub hesabıyla giriş yapılmış olmalı (`gh auth login` ya da ilk `git clone`'da açılan giriş penceresi).
+En kolayı: Claude Code'u kurup GitHub'a giriş yaptıktan sonra Claude'a **"github.com/enesgok1/claude-skills deposunu README'ye göre kur"** yazmak. Depo özel olduğu için bilgisayarda GitHub hesabıyla giriş yapılmış olmalı (`gh auth login` ya da ilk `git clone`'da açılan giriş penceresi).
 
 Elle kurmak için:
 
 **1. Skill'ler.** `~/.claude/skills/` klasörü henüz yoksa:
 
 ```bash
-git clone https://github.com/hayrigok/claude-skills.git ~/.claude/skills
+git clone https://github.com/enesgok1/claude-skills.git ~/.claude/skills
 ```
 
 Klasör varsa (içinde başka skill'ler duruyorsa):
@@ -31,7 +31,7 @@ Klasör varsa (içinde başka skill'ler duruyorsa):
 ```bash
 cd ~/.claude/skills
 git init -b main
-git remote add origin https://github.com/hayrigok/claude-skills.git
+git remote add origin https://github.com/enesgok1/claude-skills.git
 git pull origin main
 git branch --set-upstream-to=origin/main
 ```
