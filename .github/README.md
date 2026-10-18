@@ -8,6 +8,7 @@ Claude Code'un tüm projelerde kullandığı kişisel çalışma standardı ve T
 | [`turkce-arayuz-metni`](../turkce-arayuz-metni/SKILL.md) | Doğal Türkçe arayüz metni: ton, düğme ve hata mesajları, dinamik değerlere ek getirme ("Trendyol'dan", "PTT'ye", "3'te"), `tr-TR` büyük/küçük harf, para ve tarih biçimleri |
 | [`kvkk-kontrol-listesi`](../kvkk-kontrol-listesi/SKILL.md) | Kişisel veri işleyen özellikler için KVKK ve İYS mühendislik kontrol listesi. Hukuki görüş değildir. |
 | [`sahip-belgeleri`](../sahip-belgeleri/SKILL.md) | Kod yazmayan ürün sahibi için yol haritası, emojili yapılacaklar listesi ve proje CLAUDE.md'si düzeni |
+| [`replica-*`](../replica-recon/SKILL.md) (11 skill) | **Başka kaynaktan:** [Replica paketi](https://github.com/Jakeschincariol/replica-skill), Jake Schincariol, MIT (lisans her klasörde). Bir uygulamanın kopyasını sırayla kurar: inceleme, mimari, tasarım, kodlama, arka uç, test, karşılaştırma, kullanıcı yorumları, marka, tanıtım, yayın. ~1.400 token tuttuğu için `settings.json`'da kapalı (`skillOverrides: "off"`); gereken projede o projenin `.claude/settings.local.json`'ında açılır. |
 
 ## 📁 Nasıl çalışır
 

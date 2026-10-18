@@ -11,5 +11,9 @@
 !/kvkk-kontrol-listesi/
 !/sahip-belgeleri/
 
+# Exception, by the owner's request: the Replica pack (Jake Schincariol, MIT,
+# github.com/Jakeschincariol/replica-skill). Off by default in skillOverrides.
+!/replica-*/
+
 # Claude Code status line used by ~/.claude/settings.json
 !/statusline.mjs
