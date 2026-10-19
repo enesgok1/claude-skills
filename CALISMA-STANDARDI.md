@@ -104,6 +104,7 @@ Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify pr
 - GitHub kişisel hesaptaki repoda ortağa "admin" verilemez (API 422 döner); yetki seçimi yalnızca organizasyon repolarında var. Yetki sormadan önce repo sahibinin kişi mi organizasyon mu olduğuna bak (2026-10-18).
 - Pillow (ve benzeri) ile yazı çizerken yazı tipinde olmayan karakter hata vermeden kutu (□) olur: Windows'ta Bahnschrift'te ≠ ≈ oklar ● yok, Georgia'da oklar yok, Segoe UI'da var. Özel işaretten önce yazı tipinin karakter tablosu fontTools ile denetlenir (2026-10-17).
 - Bash'te çift tırnak içinde ters eğik çizgili Windows yolu değişkeni bozar: `"…\klasor\$f.txt"` içindeki `\$` dolar işaretini kaçırır, `$f` açılmaz. `cmp` olmayan dosyayla karşılaştırıp "FARKLI" dedi, dosyalar aslında aynıydı. Bash'te yol `/` ile yazılır; "fark var" sonucundan önce karşılaştırılan dosyanın var olduğu doğrulanır (2026-10-18).
+- Çıktıyı `grep` ile süzülen komutun hatası da süzülür: Git Bash'te `/usr/bin/time` yok, beş video üretimi hiçbir şey yazmadan bitti. Süre için `SECONDS` kullanılır; süzgece `Hata|Error|Traceback` eklenir ve "bitti" demeden önce çıktı dosyasının var olduğuna bakılır (2026-10-19).
 
 ## context-mode eklentisi (2026-10-02, tüm projelerde)
 Büyük araç çıktılarını (test, derleme, log, git geçmişi, tarayıcı dökümü, API yanıtı) sohbete dökmek yerine kendi alanında işler ve yalnızca özeti getirir. Kendi kurallarını her oturumun başında kendisi ekler (yaklaşık 1.300 token). Burada yalnızca sahibe özel kurallar var:
