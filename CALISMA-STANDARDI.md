@@ -1,134 +1,87 @@
 # Kişisel Çalışma Standardı (tüm projeler)
 
-Bu dosya bilgisayardaki **her projede** otomatik yüklenir. Sahibin sevgilify projesinde yerleştirdiği ve Sonra Bakarım'da olgunlaşan çalışma kurallarıdır. **Projenin kendi CLAUDE.md'si bu dosyadan önce gelir.** Çelişki varsa projeninkine uy ve çelişkiyi sahibe söyle.
+Her projede otomatik yüklenir. **Projenin kendi CLAUDE.md'si önce gelir;** çelişkide projeninkine uy ve sahibe söyle. Bu dosya her mesajda yeniden okunur: kısa tut, ayrıntıyı `~/.claude/skills/DERSLER.md`'ye ya da projenin belgelerine yaz.
 
 ## Sahip ve iletişim
-- Sahip ürünü yönetir, kod yazmaz; kodu Claude yazar. Sahip Türkçe yazar: **Türkçe yanıt ver**, kararları ürün diliyle anlat (kullanıcı ne görür, neye mal olur), teknik ayrıntıyla değil.
-- Uzun listeler ve planlar okunaklı olsun: kısa başlıklar, maddeler, uygun yerde emoji.
-- **Dürüst rapor:** Doğrulanmayanı doğrulanmış gibi sunma. Test geçmediyse çıktısıyla söyle, atlanan adımı söyle.
-- Belirsiz bir istekte en makul yorumu seç ve söyle. Sahibin vermesi gereken gerçek bir karar varsa önerinle birlikte sor.
-- **Fikirleri tek tek ve kısa sun:** ne olduğu + kime ne faydası + maliyeti varsa o + "istersen ekleriz". Sahip seçer, seçtiği plana girer (2026-10-05).
+- Sahip ürünü yönetir, kod yazmaz; kodu Claude yazar. **Türkçe yanıt ver**, kararları ürün diliyle anlat (kullanıcı ne görür, neye mal olur).
+- Okunaklı yaz: kısa başlıklar, maddeler, uygun yerde emoji. Uzun çıktıyı aktarma, özünü ver (ne oldu, sayılar, sahibin kararı).
+- **Dürüst rapor:** Doğrulanmayanı doğrulanmış gibi sunma. Başarısız testi çıktısıyla, atlanan adımı açıkça söyle. Ölçmediğin sayıyı yazma.
+- Belirsiz istekte en makul yorumu seç ve söyle. Karar gerçekten sahibinse önerinle sor.
+- Fikirleri tek tek ve kısa sun: ne + kime faydası + maliyeti + "istersen ekleriz". Sahip seçer.
 
-## Kalite standardı (her görevde, hatırlatılmadan)
-- **Kıdemli yazılımcı kalitesi:** Kusursuz kod ve kullanıcı deneyimi. Mevcut mimariyi bozma.
-- Her ekran **tüm cihazlarda** düzgün çalışmalı: telefon, tablet, masaüstü; küçük ekran, büyük yazı ayarı, açık/koyu tema. Tek cihazda deneyip bitirme.
-- Her ekranın yükleniyor, boş ve hata hali olur. Dokunma hedefi en az 44 pt/px. Ekran okuyucu etiketleri. Kullanıcıya ham İngilizce hata mesajı sızmaz.
-- Türkçe arayüz metni yazarken `turkce-arayuz-metni` skill'ini kullan. Kişisel veri işleyen özelliklerde `kvkk-kontrol-listesi` skill'ini kullan.
-- Hata düzeltirken, projede test altyapısı varsa önce hatayı yakalayan testi yaz, sonra düzelt. Test önce kırmızı, düzeltmeden sonra yeşil olmalı.
-- Kütüphane ve framework kullanırken ezberden değil güncel belgeden çalış (context7). Sürüm farkı en sık hata kaynağıdır.
-- Büyük bir değişikliği bitirmeden önce farkı (diff) baştan sona kendin incele: kullanılmayan kod, tekrar, gözden kaçan hata durumu, mimariye uymayan parça.
+## Kalite standardı
+- Kıdemli yazılımcı kalitesi, mevcut mimariyi bozma. Büyük değişikliği bitirmeden farkı baştan sona incele (kullanılmayan kod, tekrar, kaçan hata durumu).
+- Her ekran telefon, tablet ve masaüstünde, büyük yazıda, açık ve koyu temada çalışır. Yükleniyor, boş ve hata hali olur; dokunma hedefi en az 44 px; ekran okuyucu etiketi; ham İngilizce hata sızmaz.
+- Skill'ler: Türkçe arayüz metni → `turkce-arayuz-metni`, kişisel veri → `kvkk-kontrol-listesi`, sahibin belgeleri (yol haritası, yapılacaklar) → `sahip-belgeleri`.
+- Test altyapısı varsa hatayı önce kırmızı testle yakala, sonra düzelt.
+- Kütüphane kullanırken ezberden değil güncel belgeden çalış (context7).
 
 ## "Bitti" demeden önce
-- Projenin kendi komutlarıyla tip kontrolü, testler, lint ve derleme **temiz geçmeden iş bitmiş sayılmaz.** Sonuçları sayılarıyla raporla (ör. "72/72 test").
-- Statik kontroller her hatayı yakalamaz (ör. yalnızca sunucuda ya da cihazda ortaya çıkan hatalar). Gerektiğinde gerçek çalışma zamanında doğrula (route'a istek atmak, cihazda denemek). Yapamadıysan "çalışma zamanında doğrulanmadı" de.
-- Paket kurduktan ya da kaldırdıktan, şema veya üretilen kod değiştikten sonra **çalışan geliştirme sunucusunu yeniden başlat.** Garip davranış sürerse önbelleği temizleyerek başlat. Bir kural belgede yazıyor diye kendiliğinden işlemez, uygulamak senin işin.
+- Tip kontrolü, test, lint ve derleme temiz geçmeli; sayılarıyla raporla ("72/72 test").
+- Gerekirse çalışma zamanında doğrula (route'a istek, cihaz). Yapamadıysan "çalışma zamanında doğrulanmadı" de.
+- Paket, şema ya da üretilen kod değişince geliştirme sunucusunu yeniden başlat; garip davranış sürerse önbelleği temizle.
+- İki ölçünün birbirine eşit çıkması yetmez, planlanan değerle de karşılaştır.
 
 ## Git ve GitHub
-- Commit serbest: anlamlı mesaj, küçük ve mantıklı parçalar.
-- **Push yalnızca sahibin açık onayıyla.** Her push ayrı onay ister. Bir kez "yükle" denmesi sonraki commit'leri kapsamaz. Commit'ten sonra dur ve sor.
-- `--no-verify` gibi kontrol atlatan seçenekleri kullanma.
+- Commit serbest (küçük, anlamlı). **Push her seferinde sahibin açık onayıyla;** commit'ten sonra dur ve sor. `--no-verify` gibi kontrol atlatma yok.
 
-## Güvenlik, gizlilik, sırlar
-- Şifre, token, API anahtarı **koda, belgeye (CLAUDE.md dahil) ya da commit'e asla yazılmaz.** `.env` + gitignore kullan. Sızmış bir sır görürsen sahibe söyle ve değiştirilmesini öner.
-- Kullanıcı verisini üçüncü bir tarafa göndermeden önce sahibin onayını al. Yeni bir paketin veri gönderip göndermediğini (analitik, telemetri, çökme raporu) kurmadan önce kontrol et.
-- Her yeni API uç noktasında yetki kontrolü, girdi doğrulaması (yalnızca istemcide değil, sunucuda da) ve gerektiğinde istek sınırlaması standarttır.
+## Güvenlik ve gizlilik
+- Sır (şifre, token, API anahtarı) koda, belgeye, commit'e yazılmaz; `.env` + gitignore. Sızmış sır görürsen söyle, değiştirilmesini öner.
+- Kullanıcı verisini üçüncü tarafa göndermeden sahibe sor. Paket kurmadan önce veri gönderip göndermediğine (analitik, telemetri, çökme raporu) bak.
+- Her yeni API ucunda yetki kontrolü, sunucuda girdi doğrulaması, gerekirse istek sınırı (eşzamanlı istek tuzağı: DERSLER.md).
 
 ## Süreç ve araç güvenliği
-- Bir süreci durdururken **PID ya da port hedefle.** `taskkill /IM node.exe` gibi isimle toplu kapatma yapma, sahibin başka işlerini de öldürür.
-- Doğrulama için tarayıcı başlatıp kapatma, Playwright gibi tarayıcı otomasyonu dahil: **önce sor.** Sahibin açık tarayıcısına ve oturumlarına dokunma.
-- Üçüncü taraf eklenti, skill, MCP sunucusu ya da program kurmadan önce incele: kaynağı ve güvenilirliği, otomatik çalışan kancaları ve betikleri, telemetrisi, Windows'ta çalışıp çalışmadığı. Projeye uymayan kısımları kurma, nedenini söyle.
+- Süreci PID ya da portla durdur; `taskkill /IM node.exe` gibi adla toplu kapatma yok.
+- Tarayıcı başlatmadan (Playwright dahil) önce sor; sahibin açık tarayıcısına dokunma. Chrome yalnızca `--headless=new` + ayrı `--user-data-dir` ile; `chrome.exe --version` sahibin Chrome'unda pencere açar.
+- Eklenti, skill, MCP ya da program kurmadan incele: kaynak, otomatik kancalar, telemetri, Windows uyumu, projenin kütüphaneleriyle uyum. Toplu paketler bütün kurulmaz, gereken parça alınır. Uymayanı kurma, nedenini söyle.
 
-## Belgeler (projenin hafızası)
-- Kararlar tarihli ve gerekçeli yazılır. Bir iş bitince ya da yeni iş çıkınca belgeler **aynı oturumda** güncellenir. Biriktirmek en pahalı yol.
-- Düzeltilen her önemli hata kaydedilir: sorun, kök neden, çözüm, nasıl doğrulandığı, tarih.
-- Sahibin okuduğu belgeleri (yol haritası, emojili yapılacaklar listesi) kurarken ve güncellerken `sahip-belgeleri` skill'ini kullan.
+## Belgeler
+- Kararlar tarihli ve gerekçeli, iş bitince **aynı oturumda** yazılır. Önemli hata: sorun, kök neden, çözüm, doğrulama, tarih.
+- CLAUDE.md'de yalnızca geçerli kural ve tuzak durur. Geçmiş (eski kararların gerekçesi, üretilenler, çözülmüş hatalar) otomatik yüklenmeyen ayrı dosyaya yazılır.
 
 ## Tasarım
-- Logo ve ikonları sade tut. Süsleme (parıltı, rozet, ikinci şekil) eklemeden önce gerçek render'ı küçük boyutta (16-32 px) kontrol et; emin değilsen sade sürümle başla ve sor.
-- Yeni ekran yapmadan önce projedeki mevcut ekranlara ve tasarım sistemine bak. Renk, boşluk, yazı tipi ve köşe yuvarlaklığı için projenin tasarım değişkenlerini (token) kullan, koda doğrudan renk kodu yazma. Var olan bileşeni yeniden kullan, benzerini sıfırdan yazma.
-- Hazır şablon görünümünden kaçın: yeni ekran ya da sayfa tasarlarken web için `frontend-design`, mobil için `expo-design-system` ve `expo-native-ui` skill'lerini kullan.
-- Metin ile arka plan arasında okunabilir kontrast olsun (normal metinde en az 4,5:1). Bilgiyi yalnızca renkle verme. Animasyonlar "hareketi azalt" ayarına uysun.
-- Arayüz değişikliğini mümkünse ekran görüntüsüyle doğrula (emülatör ya da cihaz). Tarayıcı açmak gerekiyorsa önce sor.
+- Önce projenin mevcut ekranlarına ve tasarım değişkenlerine (token) bak; doğrudan renk kodu yazma, var olan bileşeni kullan. Yeni ekranda web → `frontend-design`, mobil → `expo-design-system`, `expo-native-ui`.
+- Logo ve ikon sade; süslemeden önce 16-32 px'te gerçek render'a bak, emin değilsen sade başla ve sor.
+- Kontrast en az 4,5:1, bilgi yalnızca renkle verilmez, animasyon "hareketi azalt"a uyar.
+- Arayüz değişikliğini ekran görüntüsüyle doğrula: "öğe var mı" değil "kullanıcı görüyor mu". Tarayıcı gerekiyorsa önce sor.
 
-## Token tasarrufu (2026-10-02)
-- Opus 5.5'in düşünme seviyesi `high` (`settings.json` → `modelSettings`), sohbet özetleme eşiği %50 (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`). Zor bir işte yalnızca o oturum için yükseltmek: `/effort` yaz, seviyeyi seç, **`s`** tuşuna bas. `/effort xhigh` yazmak ya da Enter'a basmak seçimi kalıcı kaydeder.
-- Konu değişince sahibe yeni oturum açmasını (`/clear`) öner. İlgisiz işleri aynı oturumda biriktirme. Bir aşama bitince (araştırma bitti, uygulamaya geçiliyor) `/compact` öner.
-- En büyük harcama uzun oturumlarda her mesajda yeniden okunan konuşmadır (2026-10-02: günlük 155 milyon önbellek okuması, çıktının 240 katı). Kısa ve odaklı oturum en büyük tasarruftur.
-- **Kullanımı ölçmek: `claude-usage`** (phuryn/claude-usage, `uv tool` ile kurulu, `~/.local/bin`). `claude-usage scan` ve ardından `today`, `week` ya da `stats`. Tamamen yerel çalışır. `claude-usage dashboard` tarayıcı açar, önce sor. ⚠️ Opus 5.5 fiyatı programın tablosunda yok ve eski Opus fiyatıyla hesaplıyor: dolar tutarı yaklaşık 2 kat yüksek çıkar, token sayıları doğrudur. Abonelikte dolar ödenmez, tutar yalnızca kıyas içindir.
-- Dosyanın tamamını değil gereken kısmını oku: önce ara, sonra oku. Az önce düzenlediğin dosyayı doğrulamak için yeniden okuma.
-- Komutları sessiz ya da kısa çıktı veren seçeneklerle çalıştır: `npm install --silent`, `pip install -q`, `git log --oneline -n 5`, `git status -s`, testlerde yalnızca özet ve başarısız olanlar. Komut hata verirse yalnızca o komutu ayrıntılı çıktıyla yeniden çalıştır.
-- Uzun çıktıyı sahibe aynen aktarma, kısa bir öz çıkar: ne oldu, sonuç sayıları, sahibin karar vermesi gereken şey. Aynı bilgiyi tekrar etme, gereksiz giriş ve kapanış cümlesi yazma.
-- Alt ajanı (subagent) yalnızca sahip isterse kullan. Her biri sıfırdan başlar ve küçük işte pahalıya gelir.
-- Oturum ortasında model değiştirmeyi önerme. Önbellek modele özeldir, değiştirince bütün konuşma tam fiyatla yeniden işlenir. Daha ucuz model gerekirse `opusplan` seçeneğini anlat (planlamada Opus, uygulamada Sonnet).
-- Model fiyatı, sınırı ya da özelliği sorulursa ezberden değil güncel belgeden yanıtla (`claude-api` skill'i, code.claude.com/docs).
-- Durum satırı (2026-10-02): `~/.claude/skills/statusline.mjs`. Model, düşünme seviyesi, bağlam doluluğu ve 5 saatlik/haftalık kullanım hakkını gösterir; yalnızca terminalde görünür.
-- Bu dosya her oturumda yüklenir, kısa tut. Projeye özel ayrıntı projenin CLAUDE.md'sine yazılır.
+## Token tasarrufu
+- Düşünme seviyesi `high` (`settings.json`), özetleme eşiği %50 (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`). Oturumluk yükseltme: `/effort` → seç → **`s`**. `/effort xhigh` yazmak ya da Enter'a basmak **kalıcı** kaydeder.
+- En büyük harcama, uzun oturumda her mesajda yeniden okunan konuşmadır. Konu değişince `/clear`, aşama bitince `/compact` öner.
+- Dosyanın gereken kısmını oku (önce ara); düzenlediğin dosyayı doğrulamak için yeniden okuma. Komutları sessiz çalıştır (`--silent`, `-q`, `git log --oneline -n 5`, `git status -s`); hata verirse yalnızca o komutu ayrıntılı.
+- Alt ajan yalnızca sahip isterse. Oturum ortasında model değiştirmeyi önerme (önbellek modele özel); ucuz model gerekirse `opusplan`.
+- Model fiyatı, sınırı, özelliği güncel belgeden (`claude-api` skill'i, code.claude.com/docs); ezberdeki ve videolardaki oranlar eskir.
+- Kullanım ölçümü: `claude-usage scan`, sonra `today`, `week` ya da `stats` (yerel). `claude-usage dashboard` tarayıcı açar, önce sor. Opus 5.5 fiyatı programda yok: dolar ~2 kat yüksek çıkar, token sayıları doğru.
+- Durum satırı `~/.claude/skills/statusline.mjs`, yalnızca terminalde görünür.
 
-## Eklenti ve skill seçimi: proje başına, sahip karar verir (2026-10-02)
-- Her eklenti her oturumda token harcar (2026-10-02 ölçümü: 21 eklenti toplam ~14.700 token). Bu yüzden `~/.claude/settings.json`'da eklentiler kapalı, isteğe bağlı skill'ler `skillOverrides` ile `"off"`.
-- **Her yerde açık olanlar (sormadan):** token tasarrufu sağlayanlar, yani context-mode eklentisi ve claude-usage aracı, ayrıca standardın zorunlu tuttuğu `turkce-arayuz-metni`, `kvkk-kontrol-listesi`, `sahip-belgeleri` skill'leri.
-- **Bir projeye başlarken** (ya da `.claude/settings.local.json`'da `enabledPlugins` yoksa) işe başlamadan önce projenin türüne bak ve sahiple birlikte seç: önerdiklerini işe yararlıkları ve token maliyetleriyle listele, "Bunları açayım mı?" diye sor. Sahip onaylamadan açma.
-- Önerinin çekirdeği: superpowers, context-mode, context7, commit-commands, code-review, security-guidance (~1.900 token). Türüne göre ekle: Expo → expo, frontend-mobile-development, frontend-mobile-security; web → ui-design, frontend-mobile-development, playwright ve `frontend-design` + `ui-ux-pro-max` skill'leri; sunucu/veritabanı → backend-api-security, database-design; ayrıca javascript-typescript, unit-testing, accessibility-compliance, seo-technical-optimization.
-- Onaylananları projenin `.claude/settings.local.json` dosyasına yaz (`enabledPlugins: {...: true}`, skill'ler için `skillOverrides: {...: "on"}`). Dosyanın git'in dışında kaldığını kontrol et. Sonra yeni oturum gerekir.
-- Bir eklentinin maliyetini ölçmek: `claude.exe plugin details <ad>` ("Always-on" satırı). Bir projede neyin açık olduğunu görmek: proje klasöründe `claude.exe plugin list`.
-- İş sırasında kapalı bir eklenti ya da skill gerekirse sahibe sor, kendiliğinden açma.
+## Eklenti ve skill seçimi (sahip karar verir)
+- Eklentiler `~/.claude/settings.json`'da kapalı, isteğe bağlı skill'ler `skillOverrides` ile `"off"`: her eklenti her oturumda token yer. Her yerde açık: context-mode, claude-usage, `turkce-arayuz-metni`, `kvkk-kontrol-listesi`, `sahip-belgeleri`.
+- Projeye başlarken (`.claude/settings.local.json`'da `enabledPlugins` yoksa) türüne göre öner, maliyetleriyle listele, onay al. Çekirdek: superpowers, context-mode, context7, commit-commands, code-review, security-guidance. Expo → expo, frontend-mobile-development, frontend-mobile-security. Web → ui-design, frontend-mobile-development, playwright + `frontend-design`, `ui-ux-pro-max`. Ekranı olan her projede tasarım skill'leri de önerilir. Sunucu → backend-api-security, database-design. Ayrıca javascript-typescript, unit-testing, accessibility-compliance, seo-technical-optimization.
+- Onaylananlar `.claude/settings.local.json`'a (git dışında kaldığını kontrol et); sonra yeni oturum. İş sırasında kapalı olan gerekirse sor, kendiliğinden açma.
+- Maliyet: `claude.exe plugin details <ad>` ("Always-on"). Açıklar: proje klasöründe `claude.exe plugin list`. `/plugin` VS Code panelinde çalışmaz.
 
-## Öğrenilen dersler (aynı hatayı iki kez yapma)
-- Bir hata yaptığında, sahip seni düzelttiğinde ya da bir şey beklenenden farklı çıktığında dersi **aynı oturumda** tek satırla yaz: tüm projeleri ilgilendiriyorsa buraya, tek projeyi ilgilendiriyorsa o projenin CLAUDE.md'sine. Benzer bir işe başlamadan önce bu listeye bak.
-- Ders kısa olur: ne yanlış gitti → doğrusu ne. Uzun hikâye yazma, liste şişerse eskimiş dersleri sil.
-- `/effort xhigh` yazmak oturumluk değil kalıcıdır; oturumluk yükseltme için `/effort` → seç → `s` (2026-10-02).
-- `MAX_THINKING_TOKENS` Opus 5.5'te işe yaramaz; düşünme miktarı yalnızca effort ile ayarlanır (2026-10-02).
-- Videolardaki model fiyatı ve "kaç kat pahalı" oranları eskiyebilir; güncel belgeden doğrula. 2026-10-02'de Haiku 4.5 / Sonnet 5.5 / Opus 5.5 = 1 / 2 / 4 $ (girdi, milyon token).
-- `/plugin` komutları VS Code panelinde çalışmaz; eklentiyi `claude.exe plugin ...` ile kur (2026-10-02).
-- Durum satırı (`statusLine`) VS Code sohbet panelinde görünmez, yalnızca terminal modunda görünür (2026-10-02).
-- Dış kaynaklı skill'ler kendi kütüphane tercihlerini dayatabilir (ör. ECC `react-native-patterns`: TanStack, NativeWind, Expo SDK 55). Eklemeden önce projenin `package.json`'ıyla karşılaştır; uymuyorsa alma (2026-10-02).
-- Toplu paketler (ör. ECC: 293 skill, 68 ajan) bütün olarak kurulmaz; liste yükü tasarrufu yok eder. Yalnızca gereken parça incelenip alınır (2026-10-02).
-- `ANTHROPIC_BASE_URL` ile başka bir sağlayıcıya (ör. Qwen) geçmek token tasarrufu değildir: veri üçüncü tarafa gider, araç arama ve Remote Control kapanır (2026-10-02).
-- Windows'ta `chrome.exe --version` sürüm basmaz, sahibin açık Chrome'una "yeni pencere aç" gönderir. Chrome'u yalnızca `--headless=new` ve ayrı `--user-data-dir` ile çalıştır; sürüm gerekiyorsa dosya bilgisinden oku (2026-10-02).
-- Chrome 149'da CDP ağ kısıtlaması `127.0.0.1` adresine uygulanmıyor, `localhost`'a uygulanıyor. Hız ölçümü `localhost` ile yapılır (2026-10-02).
-- context-mode kabuk komutunun başına `NODE_OPTIONS=...` ekliyor; komut `for`/`if`/`while` ile başlarsa sözdizimi hatası verir. Önce sıradan bir komut koy (`cd klasör && for ...`) (2026-10-04).
-- Ekranı olan projede eklenti önerisine kapalı duran tasarım skill'lerini (`ui-ux-pro-max`, `frontend-design`) de koy; Servis Takip'te unutuldu, sahip sordu (2026-10-06).
-- PostgreSQL EDB kurulumu Türkçe Windows'ta `initdb`'de düşer (yerel ayar adı ASCII değil) → kümeyi `--locale C` ile kur, Türkçe sıralamayı veritabanında ICU `tr-TR` ile ver. winget `--override` ile verilen şifre winget günlüğüne açık yazılır → kurulumdan sonra şifreyi değiştir (2026-10-06).
-- Next.js 16: `next dev` yapay zekâ aracını görünce CLAUDE.md'ye İngilizce blok ekler → `next.config`'te `agentRules: false`. Sayfa silince `.next/types` bayat kalıp tsc'yi düşürür → `rm -rf .next/types`. Vitest yapılandırması `.mts` olsun (ESM uyarısı) (2026-10-06).
-- Dosya yazma/düzenleme araçlarında ters eğik çizgili kaçış dizileri (ör. yumuşak tire) parametre çözümlenirken gerçek karaktere dönüşebilir ya da çiftlenebilir; Perl'de değiştirme metnindeki ters eğik çizgi+u "büyük harf" komutudur. Kaynakta kaçış dizisi gerekiyorsa Node betiğiyle yaz ve karakter karakter doğrula (2026-10-06).
-- Giriş/deneme sınırları eşzamanlı isteklerle atlatılır (önce oku sonra say): sayaç baştan artırılır, satır `FOR UPDATE` ile kilitlenir, her sınıra eşzamanlılık testi yazılır. Önde tek güvenilir ters vekil varken istemci IP'si `x-forwarded-for`'un en sağından alınır; soldakini istemci yazar (2026-10-06).
-- Büyük yazıda (%200) dar ekran: sütun sayısı verilmemiş CSS `grid` en geniş içeriğe göre genişleyip sayfayı kaydırır → `grid-cols-1`; "yatay kayma yok" testi tek başına yetmez, kutusundan taşan öğe de denetlenir. `role="alert"` aynı metinle yerinde kalırsa ekran okuyucu ikinci hatayı okumaz → gönderim sürerken bildirimi kaldır (2026-10-06).
-- Repoyu public yapmadan önce tüm dalların tüm geçmişi taranır, arşivlerin (zip) içi dahil. Pull Request'li repoda geçmişi yeniden yazmak yetmez, GitHub PR'ın eski commit'lerini tutar → temiz geçmiş yeni repoya gönderilir, eskisi `-ozel` adıyla private kalır. `gh` oturumunda `workflow` izni yok: `.github/workflows` içeren repoyu göndermek için önce `gh auth refresh -h github.com -s workflow` (2026-10-08).
-- Bash'te çift tırnaklı `node -e "…"` içine ters tırnak (Markdown kodu, şablon dizgesi) yazılırsa kabuk onu komut olarak çalıştırmaya kalkar (2026-10-07'de `npm run dev` denendi). Ters tırnak ya da `${…}` içeren metin Edit aracıyla ya da önce dosyaya yazılan bir betikle değiştirilir (2026-10-07).
-- Git Bash'in PATH'indeki `tar` GNU tar'dır: zip açamaz, `D:\…` yolunu uzak makine sanar. Betiklerde Windows'ta `%SystemRoot%\System32\tar.exe` (bsdtar) çağrılır (2026-10-12).
-- Bir ölçüyü ölçmeden yazma: "3-4 kat tasarruf" tahmini gerçek dosyada %25-50 çıktı. Kod açıklamasına ve belgeye ölçülen sayı yazılır (2026-10-12).
-- Ters tırnak ya da `${…}` içeren betik tırnaklı heredoc (`<<'EOF'`) ile de yazılamıyor: bu ortamda kabuk "unexpected EOF" verip hiçbir şeyi çalıştırmıyor (iki kez oldu). Betik Write aracıyla dosyaya yazılır, sonra çalıştırılır; küçük değişiklikte Edit aracı (2026-10-12).
-- Görsel bileşende "öğe var mı" değil "kullanıcı görüyor mu" sınanır: Playwright `toBeVisible` üst öğesi tarafından tamamen kırpılmış öğede de geçer, `toBeInViewport` kırpılmayı hesaba katar. Üçüncü taraf stil dosyası (ör. MapLibre) kendi kutusunun konumlandırmasını ezip sıfır yükseklik bırakabilir; ekran görüntüsüne gerçek içerikle gözle bakılır (Servis Takip'te harita ilk hâlinde hiç görünmüyordu, 2026-10-12).
-- `git-filter-repo --force` taze olmayan kopyada `origin`'deki uzak dalları yerel dal olarak geri açar (silinmiş eski dal geri geldi) → yeniden yazımdan önce `git bundle create … --all` ile yedek, sonra `git branch` bakılır, ana dalın içinde kalanlar silinir; dosya ağacının özeti (`HEAD^{tree}`) önce ve sonra aynı olmalı (2026-10-16).
-- Paralel iş (çok süreçli çizim, derleme) başlatmadan önce tek sürecin tepe belleği ölçülür, süreç sayısı boş belleğe göre seçilir: 16 çekirdek var diye 8 süreç açmak (süreç başına ~1 GB) 6,5 GB boş belleği aşardı. Python'da Windows API'yi `ctypes` ile çağırırken `restype`/`argtypes` (HANDLE) tanımlanmazsa 64 bitte tanıtıcı kesilir, çağrı sessizce başarısız olur (ölçüm 0 MB döndü) (2026-10-17).
-- GitHub kişisel hesaptaki repoda ortağa "admin" verilemez (API 422 döner); yetki seçimi yalnızca organizasyon repolarında var. Yetki sormadan önce repo sahibinin kişi mi organizasyon mu olduğuna bak (2026-10-18).
-- Pillow (ve benzeri) ile yazı çizerken yazı tipinde olmayan karakter hata vermeden kutu (□) olur: Windows'ta Bahnschrift'te ≠ ≈ oklar ● yok, Georgia'da oklar yok, Segoe UI'da var. Özel işaretten önce yazı tipinin karakter tablosu fontTools ile denetlenir (2026-10-17).
-- Bash'te çift tırnak içinde ters eğik çizgili Windows yolu değişkeni bozar: `"…\klasor\$f.txt"` içindeki `\$` dolar işaretini kaçırır, `$f` açılmaz. `cmp` olmayan dosyayla karşılaştırıp "FARKLI" dedi, dosyalar aslında aynıydı. Bash'te yol `/` ile yazılır; "fark var" sonucundan önce karşılaştırılan dosyanın var olduğu doğrulanır (2026-10-18).
-- Çıktıyı `grep` ile süzülen komutun hatası da süzülür: Git Bash'te `/usr/bin/time` yok, beş video üretimi hiçbir şey yazmadan bitti. Süre için `SECONDS` kullanılır; süzgece `Hata|Error|Traceback` eklenir ve "bitti" demeden önce çıktı dosyasının var olduğuna bakılır (2026-10-19).
-- İki ölçünün birbirine eşit çıkması doğru oldukları anlamına gelmez, planlanan değerle de karşılaştırılır: videoda ses ile görüntü eşitti ama ikisi de planlanandan 0,1 sn kısaydı. FFmpeg `loudnorm` zaman damgasını kaydırmış, `-t` sesi, `-shortest` görüntüyü kesmişti; çözüm zincirin sonuna `asetpts=N/SR/TB` (2026-10-19).
-- FFmpeg'de kare hızı ve kare sayısı (Uzun Video'da ölçüldü, 2026-10-19). `ffmpeg -i`'deki "fps" ortalamadır, kesilmiş videoda 30 yerine "30.02" görünür. Kare hızı `tbr` ile karşılaştırılıp alınır. `fps` süzgeci son kareyi atar → önüne `tpad=stop_mode=clone`, çıkışa `-frames:v N`. Her `-f rawvideo` çıkışına (sayarken de, Python'a kare akıtırken de) `-fps_mode passthrough` eklenir. Eklenmezse kare tekrarlanır ve atılır, görüntü sesten 1 kare kayar. Sınamanın başvurusu baştan çözüp `select='eq(n\,K)'` ile seçilen karedir; tekil `-ss` karesi aynı hatadan geçtiği için başvuru olamaz.
-- Bash'te `a || b <<'EOF'` zincirinde heredoc yalnızca `b`'ye gider, `a` girdi bekleyip takılır (`python -` iki dakika bekledi). Yedekli komut zinciri heredoc'la kurulmaz; betik dosyaya yazılır ya da Edit aracı kullanılır (2026-10-19).
+## Öğrenilen dersler
+- Hata, düzeltme ya da beklenmedik sonuçta dersi aynı oturumda tek satırla yaz: genelse `~/.claude/skills/DERSLER.md`'nin ilgili başlığına, tek projeyse o projenin CLAUDE.md'sine. Kısa: ne yanlış gitti → doğrusu.
+- **Şu işlere başlamadan DERSLER.md'nin ilgili başlığını oku:** FFmpeg ve video, Pillow ve yazı tipleri, paralel iş, Playwright ve tarayıcı, web arayüzü, Next.js, PostgreSQL, istek sınırları, Git geçmişini yeniden yazma, repoyu public yapma, GitHub yetkileri, Claude Code ayarları ve eklentiler.
+- Her zaman geçerli kabuk tuzakları (Git Bash):
+  - Ters tırnak ya da `${…}` içeren metin `node -e "…"`, heredoc (tırnaklı da) ya da `a || b <<EOF` zinciriyle yazılmaz → betik Write ile dosyaya yazılıp çalıştırılır; küçük değişiklikte Edit.
+  - Kaçış dizisi (ör. yumuşak tire) gereken kaynak Node betiğiyle yazılır, karakter karakter doğrulanır.
+  - Komut `for`/`if`/`while` ile başlamasın (context-mode başına `NODE_OPTIONS` ekler) → önce `cd klasör &&`.
+  - Yol `/` ile yazılır: çift tırnakta `\$` değişkeni bozar. "Fark var" demeden önce karşılaştırılan dosyanın var olduğunu doğrula.
+  - `/` ile başlayan argüman Windows yoluna çevrilir → PowerShell ya da `MSYS_NO_PATHCONV=1`.
+  - `tar` GNU tar'dır, zip açmaz → `%SystemRoot%\System32\tar.exe`. `/usr/bin/time` yok → `SECONDS`.
+  - Çıktı `grep`'le süzülürken `Hata|Error|Traceback` da süzgece eklenir; "bitti" demeden önce çıktı dosyasına bakılır.
 
-## context-mode eklentisi (2026-10-02, tüm projelerde)
-Büyük araç çıktılarını (test, derleme, log, git geçmişi, tarayıcı dökümü, API yanıtı) sohbete dökmek yerine kendi alanında işler ve yalnızca özeti getirir. Kendi kurallarını her oturumun başında kendisi ekler (yaklaşık 1.300 token). Burada yalnızca sahibe özel kurallar var:
-- Düzenlenecek dosya normal `Read` ile okunur. İnceleme ve özet için `ctx_execute_file`, çok çıktı üreten komutlar için `ctx_batch_execute` ya da `ctx_execute` kullan. Test ve derleme sonuçlarını yine sayılarıyla raporla.
-- Web sayfası okuma aracı ve `curl` engellidir: `ctx_fetch_and_index` + `ctx_search` kullan. Kütüphane belgesi için context7 geçerli.
-- Playwright araçlarında her zaman `filename` parametresini ver, çıktı dosyaya gitsin.
-- **Sormadan kullanma:** `ctx_insight` (tarayıcı açar, ücretli bir web paneline götürür), `ctx_purge` (bilgi tabanını siler), `ctx_upgrade` (eklentiyi günceller; yeni sürüm kurulmadan önce yeniden incelenir).
-- `%APPDATA%\context-mode\platform.json` dosyasını **asla oluşturma.** Bu dosya varsa eklenti bütün oturum olaylarını dış bir sunucuya gönderir.
-- Eklenti `settings.json`'a kendi onarım kancasını ekler (`~/.claude/hooks/context-mode-cache-heal.mjs`; yalnızca yerel dosya yollarını onarır, ağ yok). Kaldırırken bunu da sil.
-- Sorun çıkarsa `ctx doctor`. Kaldırmak için: `claude.exe plugin uninstall context-mode@context-mode`.
-- Eklentinin kuralları bu dosyayla ya da proje kurallarıyla çelişirse bu dosya ve proje kuralları önce gelir.
+## context-mode eklentisi
+Büyük çıktıları kendi alanında işleyip özet getirir. Sahibe özel kurallar (eklentinin kurallarından önce gelir):
+- Düzenlenecek dosya `Read` ile. İnceleme `ctx_execute_file`, çok çıktılı komut `ctx_batch_execute` ya da `ctx_execute`; sonuçlar yine sayılarıyla raporlanır. Web sayfası `ctx_fetch_and_index` + `ctx_search` (WebFetch ve `curl` engelli). Playwright'ta her zaman `filename`.
+- **Sormadan kullanma:** `ctx_insight` (ücretli web paneline götürür), `ctx_purge` (bilgi tabanını siler), `ctx_upgrade` (yeni sürüm kurulmadan önce incelenir).
+- `%APPDATA%\context-mode\platform.json` **asla oluşturulmaz:** varsa eklenti bütün oturum olaylarını dış sunucuya gönderir.
+- Onarım kancası `~/.claude/hooks/context-mode-cache-heal.mjs` (yerel, ağ yok); eklenti kaldırılırken o da silinir. Sorun: `ctx doctor`. Kaldırma: `claude.exe plugin uninstall context-mode@context-mode`.
 
 ## Ortam (Windows)
-- Claude CLI PATH'te yok. Eklenti ve MCP yönetimi için VS Code eklentisindeki `claude.exe` kullanılır: `~/.vscode/extensions/anthropic.claude-code-*/resources/native-binary/claude.exe`.
-- GitHub CLI: `"/c/Program Files/GitHub CLI/gh.exe"`. Python araçları: `uv`/`uvx` (`%LOCALAPPDATA%\Microsoft\WinGet\Links\`).
-- Node 24 ve npm 11: Geliştirme bağımlılığı için `--save-dev` kullan (`--dev` artık çalışmıyor). MCP sunucusunu `npx` ile başlatırken `cmd /c npx ...` kullan.
-- **Git Bash, `/` ile başlayan argümanları Windows yoluna çevirir.** Örneğin `claude -p "/context"` modele `C:/Program Files/Git/context` olarak gitti. `/c` ya da `/komut` gibi argümanlarda PowerShell kullan ya da komutun başına `MSYS_NO_PATHCONV=1` koy.
-- **`claude -p` ile arka planda oturum açmak ücretsiz değildir.** Boş bir oturum bile yaklaşık 68 bin token taşır (2026-10-02'de liste fiyatıyla 0,36-0,44 $). Başlatmadan önce maliyetini doğru söyle. Mümkünse model çağırmadan, dosyalardan hesaplayarak doğrula.
-- **Ortak skill'ler ve bu dosya GitHub'da (2026-10-02):** `~/.claude/skills/` klasörü https://github.com/enesgok1/claude-skills (özel) deposudur. `.gitignore` yalnızca Claude'un yazdığı skill'leri (`turkce-arayuz-metni`, `kvkk-kontrol-listesi`, `sahip-belgeleri`) ve bu dosyanın kopyası `CALISMA-STANDARDI.md`'yi depoya alır; başka kaynaklardan kurulanlar dışarıda kalır.
-  - **Bu dosya değişince** `~/.claude/skills/CALISMA-STANDARDI.md`'ye kopyala ve commit et. Depodan güncelleme çekince (`git pull`) tersini yap: kopyayı bu dosyanın üstüne yaz. Skill değişince de commit et. Push için her seferinde sahibe sor.
-  - Yeni skill eklenirse `.gitignore`'a `!/<ad>/` satırını ve `.github/README.md`'deki tabloya bir satır ekle. Başka bilgisayara kurulum README'de.
-  - `~/.claude` klasörünün kendisi depo yapılmaz: içinde giriş bilgileri ve oturum kayıtları var. Bu klasöre yazmak otomatik modda engellenir; sahibin onay veren moduna geçmesi gerekir.
-- Skill listesine ayrılan yer `~/.claude/settings.json`'da `"skillListingBudgetFraction": 0.02` (sahibin onayıyla, 2026-10-02). Yeni eklenti ya da skill kurunca listenin sığdığını kontrol et. Ayrıntısı Sonra Bakarım CLAUDE.md'sinin "Kurulu geliştirme araçları" bölümünde.
-- Kurulu eklentilerin (superpowers, Expo, kod inceleme, güvenlik, wshobson uzmanları, context7, playwright, mobile-mcp; context-mode için yukarıdaki bölüm) ayrıntıları Sonra Bakarım projesinin CLAUDE.md'sinde, "Kurulu geliştirme araçları" bölümünde. Skill'ler ve eklentiler bu dosyadaki ve projedeki kuralları geçersiz kılamaz.
+- `claude.exe` PATH'te yok: `~/.vscode/extensions/anthropic.claude-code-*/resources/native-binary/claude.exe`. GitHub CLI: `"/c/Program Files/GitHub CLI/gh.exe"`. Python araçları `uv`/`uvx` (`%LOCALAPPDATA%\Microsoft\WinGet\Links\`).
+- Node 24, npm 11: `--save-dev` (`--dev` çalışmıyor). MCP sunucusu `cmd /c npx ...` ile başlatılır.
+- `claude -p` ücretsiz değil (boş oturum ~68 bin token); başlatmadan maliyetini söyle, mümkünse dosyadan hesapla.
+- `~/.claude/skills/` = https://github.com/enesgok1/claude-skills (özel). Bu dosya değişince `CALISMA-STANDARDI.md`'ye kopyalanıp commit edilir (`git pull` sonrası tersi). `DERSLER.md` ve kendi skill'lerimiz de orada; yeni skill için `.gitignore`'a `!/<ad>/` ve `.github/README.md` tablosuna satır. Push için sor. `~/.claude`'un kendisi depo yapılmaz (giriş bilgileri var); oraya yazmak otomatik modda engellenebilir.
+- Skill listesi bütçesi `"skillListingBudgetFraction": 0.02`; yeni kurulumda listenin sığdığını kontrol et. Kurulu eklentilerin ayrıntısı Sonra Bakarım CLAUDE.md'sinde ("Kurulu geliştirme araçları"). Skill ve eklentiler bu dosyadaki ve projedeki kuralları geçersiz kılamaz.

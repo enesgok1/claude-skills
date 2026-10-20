@@ -5,6 +5,7 @@ Claude Code'un tüm projelerde kullandığı kişisel çalışma standardı ve T
 | Dosya | Ne işe yarar |
 |---|---|
 | [`CALISMA-STANDARDI.md`](../CALISMA-STANDARDI.md) | Sahibin tüm projelerdeki çalışma kuralları: iletişim, kalite çıtası, doğrulama, git ve push onayı, güvenlik, belgeler, tasarım, token tasarrufu ve context-mode eklentisi. Bilgisayarda `~/.claude/CLAUDE.md` olarak durur. |
+| [`DERSLER.md`](../DERSLER.md) | Konuya göre öğrenilen dersler (kabuk, FFmpeg, tarayıcı, web, Git, Claude Code). Her oturumda yüklenmez; standart, ilgili işe başlamadan doğru başlığa yönlendirir. Yerinde durur, kopyalanmaz. |
 | [`turkce-arayuz-metni`](../turkce-arayuz-metni/SKILL.md) | Doğal Türkçe arayüz metni: ton, düğme ve hata mesajları, dinamik değerlere ek getirme ("Trendyol'dan", "PTT'ye", "3'te"), `tr-TR` büyük/küçük harf, para ve tarih biçimleri |
 | [`kvkk-kontrol-listesi`](../kvkk-kontrol-listesi/SKILL.md) | Kişisel veri işleyen özellikler için KVKK ve İYS mühendislik kontrol listesi. Hukuki görüş değildir. |
 | [`sahip-belgeleri`](../sahip-belgeleri/SKILL.md) | Kod yazmayan ürün sahibi için yol haritası, emojili yapılacaklar listesi ve proje CLAUDE.md'si düzeni |
