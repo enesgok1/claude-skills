@@ -22,6 +22,7 @@
 
 - Pillow `ImageDraw` RGBA görüntüde saydam rengi karıştırmaz, pikselin üstüne yazar (%4 beyaz çizgi bembeyaz çıktı, belirme animasyonu anında çıktı). Saydam çizim ya ayrı saydam katmana + `alpha_composite`, ya da RGB görüntü + `ImageDraw.Draw(im, "RGBA")`. "F" kipli görüntü `GaussianBlur` almaz → numpy ile bulanıklaştır (2026-10-26).
 - Anlatımlı videoda efekt (bip, vuruş) kelimenin başına konmaz, ~0,25 sn arkasına ve alçak: kat bipi "On dört. On beş."i örttü, Whisper atladı. Karışımdan sonra `dinle.py` her cümleyi bulmalı (2026-10-26).
+- İki videonun sesi karşılaştırılırken ikisi de aynı betik ve aynı yöntemle ölçülür: kelime arası maskesindeki ±0,05 sn ve pencere seçimi farkı konuşma–altlık farkını 7,0 ile 4,6 dB arasında oynattı, "müziği 3 dB yükselt" diye yanlış öneriye götürdü. Kanıtlanmış ölçüm betiğe bağlanır, örneğin değeri JSON'a kaydedilir. Ses hakkında "sessiz", "boğuk" gibi yargı ölçülmeden kurala yazılmaz (2026-10-26).
 - FFmpeg ile video analizi (2026-10-25): `metadata=print` önüne `select` konmazsa her kareyi yazar, çıktıyı sohbete basma; dosyaya yazdırıp Python'la özetle. Süzgeçteki `file=C:/...` yolunun iki noktası süzgeci bozar: klasöre geçip göreli ad ver. Animasyonda sahneler çözülme ve kamera hareketiyle değiştiği için `scene`/`scdet` sabit eşiği kesmelerin çoğunu kaçırır: saniyede bir kare paftası daha güvenilir. `drawtext` Windows'ta fontconfig bulamazsa `fontfile='C\:/Windows/Fonts/arial.ttf'` ver.
 
 ## Tarayıcı ve Playwright
