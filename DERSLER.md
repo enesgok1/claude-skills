@@ -33,6 +33,7 @@
 - Repoyu public yapmadan önce tüm dalların tüm geçmişi taranır, arşivlerin (zip) içi dahil. Pull Request'li repoda geçmişi yeniden yazmak yetmez, GitHub PR'ın eski commit'lerini tutar → temiz geçmiş yeni repoya gönderilir, eskisi `-ozel` adıyla private kalır. `gh` oturumunda `workflow` izni yok: `.github/workflows` içeren repoyu göndermek için önce `gh auth refresh -h github.com -s workflow` (2026-10-08).
 - `git-filter-repo --force` taze olmayan kopyada `origin`'deki uzak dalları yerel dal olarak geri açar (silinmiş eski dal geri geldi) → yeniden yazımdan önce `git bundle create … --all` ile yedek, sonra `git branch` bakılır, ana dalın içinde kalanlar silinir; dosya ağacının özeti (`HEAD^{tree}`) önce ve sonra aynı olmalı (2026-10-16).
 - GitHub kişisel hesaptaki repoda ortağa "admin" verilemez (API 422 döner); yetki seçimi yalnızca organizasyon repolarında var. Yetki sormadan önce repo sahibinin kişi mi organizasyon mu olduğuna bak (2026-10-18).
+- PowerShell 5.1'de `git commit -m @'…'@` mesajı içinde çift tırnak (`"…"`) varsa argümanlar bölünür, commit düşer ve sonraki `git add` + commit hepsini tek commit'e toplar → mesaj dosyaya yazılıp `git commit -F dosya`; zincirde her commit'ten sonra `$?` kontrolü. Yeni repoda ilk commit'ten sonra `git status -sb` ile upstream ve push durumuna bakılır (ilk commit bir hafta gönderilmeden kalmıştı) (2026-10-25).
 
 ## Claude Code, eklentiler ve modeller
 - `/effort xhigh` yazmak oturumluk değil kalıcıdır; oturumluk yükseltme için `/effort` → seç → `s` (2026-10-02).
