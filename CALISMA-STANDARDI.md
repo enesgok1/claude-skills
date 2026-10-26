@@ -46,7 +46,7 @@ Her projede otomatik yüklenir. **Projenin kendi CLAUDE.md'si önce gelir;** çe
 - Arayüz değişikliğini ekran görüntüsüyle doğrula: "öğe var mı" değil "kullanıcı görüyor mu". Tarayıcı gerekiyorsa önce sor.
 
 ## Token tasarrufu
-- Düşünme seviyesi `high` (`settings.json`), özetleme eşiği %50 (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`). Oturumluk yükseltme: `/effort` → seç → **`s`**. `/effort xhigh` yazmak ya da Enter'a basmak **kalıcı** kaydeder.
+- Düşünme seviyesi `medium` (`settings.json` → `modelSettings`), özetleme eşiği %20 ≈ 200K (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`; 2026-10-27, ölçüm: girdinin %90'ı 100K üstü bağlamdan). Oturumluk yükseltme: `/effort` → seç → **`s`**. `/effort xhigh` yazmak ya da Enter'a basmak **kalıcı** kaydeder.
 - En büyük harcama, uzun oturumda her mesajda yeniden okunan konuşmadır. Konu değişince `/clear`, aşama bitince `/compact` öner.
 - Dosyanın gereken kısmını oku (önce ara); düzenlediğin dosyayı doğrulamak için yeniden okuma. Komutları sessiz çalıştır (`--silent`, `-q`, `git log --oneline -n 5`, `git status -s`); hata verirse yalnızca o komutu ayrıntılı.
 - Alt ajan yalnızca sahip isterse. Oturum ortasında model değiştirmeyi önerme (önbellek modele özel); ucuz model gerekirse `opusplan`.
