@@ -48,6 +48,7 @@ Her projede otomatik yüklenir. **Projenin kendi CLAUDE.md'si önce gelir;** çe
 ## Token tasarrufu
 - Düşünme seviyesi `medium` (`settings.json` → `modelSettings`), özetleme eşiği %20 ≈ 200K (`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE`; 2026-10-27, ölçüm: girdinin %90'ı 100K üstü bağlamdan). Oturumluk yükseltme: `/effort` → seç → **`s`**. `/effort xhigh` yazmak ya da Enter'a basmak **kalıcı** kaydeder.
 - En büyük harcama, uzun oturumda her mesajda yeniden okunan konuşmadır. Konu değişince `/clear`, aşama bitince `/compact` öner.
+- İş bitip kalıcı kayıtlar (CLAUDE.md, GECMIS.md, DERSLER.md, belgeler) yazılınca mesajın sonuna **"🧹 Kayıtlar yazıldı, `/clear` atabilirsin."** yaz; bekleyen iş (push onayı, yarım adım) varsa yanına ekle. Sahip "clear atayım mı" diye sormaz, bu satırı bekler (2026-10-27).
 - Dosyanın gereken kısmını oku (önce ara); düzenlediğin dosyayı doğrulamak için yeniden okuma. Komutları sessiz çalıştır (`--silent`, `-q`, `git log --oneline -n 5`, `git status -s`); hata verirse yalnızca o komutu ayrıntılı.
 - Alt ajan yalnızca sahip isterse. Oturum ortasında model değiştirmeyi önerme (önbellek modele özel); ucuz model gerekirse `opusplan`.
 - Model fiyatı, sınırı, özelliği güncel belgeden (`claude-api` skill'i, code.claude.com/docs); ezberdeki ve videolardaki oranlar eskir.
