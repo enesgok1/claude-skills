@@ -24,6 +24,7 @@
 - Pillow 13'te `ImageDraw.Draw(RGB, "RGBA").text()` dolgu rengindeki alfayı yok sayar (şekiller karışır, metin karışmaz); `stroke_fill` alfasız verildiyse kontur da hep opak kalır. Belirip kaybolan yazı "hep görünür" çıkar. Saydam metin küçük ayrı RGBA katmana tam opak çizilip alfası ölçeklenerek bindirilir. Not: `uv run --with pillow` sistemdeki sürümü değil en yenisini kurar (2026-10-26).
 - Anlatımlı videoda efekt (bip, vuruş) kelimenin başına konmaz, ~0,25 sn arkasına ve alçak: kat bipi "On dört. On beş."i örttü, Whisper atladı. Karışımdan sonra `dinle.py` her cümleyi bulmalı (2026-10-26).
 - İki videonun sesi karşılaştırılırken ikisi de aynı betik ve aynı yöntemle ölçülür: kelime arası maskesindeki ±0,05 sn ve pencere seçimi farkı konuşma–altlık farkını 7,0 ile 4,6 dB arasında oynattı, "müziği 3 dB yükselt" diye yanlış öneriye götürdü. Kanıtlanmış ölçüm betiğe bağlanır, örneğin değeri JSON'a kaydedilir. Ses hakkında "sessiz", "boğuk" gibi yargı ölçülmeden kurala yazılmaz (2026-10-26).
+- Ses süzgeci (telefon/telsiz bandı) uygulanırken doygunluk ya da bozulma (`tanh`) süzgeçten önce gelir; sonra gelirse kesilen tizi geri üretir (2026-10-27).
 - FFmpeg ile video analizi (2026-10-25): `metadata=print` önüne `select` konmazsa her kareyi yazar, çıktıyı sohbete basma; dosyaya yazdırıp Python'la özetle. Süzgeçteki `file=C:/...` yolunun iki noktası süzgeci bozar: klasöre geçip göreli ad ver. Animasyonda sahneler çözülme ve kamera hareketiyle değiştiği için `scene`/`scdet` sabit eşiği kesmelerin çoğunu kaçırır: saniyede bir kare paftası daha güvenilir. `drawtext` Windows'ta fontconfig bulamazsa `fontfile='C\:/Windows/Fonts/arial.ttf'` ver.
 
 ## Tarayıcı ve Playwright
@@ -56,7 +57,7 @@
 - GitHub kişisel hesaptaki repoda ortağa "admin" verilemez (API 422 döner); yetki seçimi yalnızca organizasyon repolarında var. Yetki sormadan önce repo sahibinin kişi mi organizasyon mu olduğuna bak (2026-10-18).
 - PowerShell 5.1'de `git commit -m @'…'@` mesajı içinde çift tırnak (`"…"`) varsa argümanlar bölünür, commit düşer ve sonraki `git add` + commit hepsini tek commit'e toplar → mesaj dosyaya yazılıp `git commit -F dosya`; zincirde her commit'ten sonra `$?` kontrolü. Yeni repoda ilk commit'ten sonra `git status -sb` ile upstream ve push durumuna bakılır (ilk commit bir hafta gönderilmeden kalmıştı) (2026-10-25).
 - Push onayı istemeden önce `git status -sb` ile kaç commit önde olunduğuna bakılır, soruda bu sayı yazılır: "bugünkü 3 commit" diye onay alınan push önceki oturumlardan kalan 8 commit'i de gönderdi (Dönüşüm Teknik, 2026-10-26).
-- Bu bilgisayarda genel git kimliği yok: yeni depoda ilk commit "Author identity unknown" ile düşer → depo bazında `git config user.name "Enes Gök"` ve `git config user.email enesgok0@outlook.com` (skill deposundaki kimlik); `--global` yazılmaz. Commit mesajı dosyası PowerShell 5.1'de `Set-Content -Encoding utf8` ile yazılırsa başına BOM girer ve konu satırı görünmez karakterle başlar → mesaj dosyası Write aracıyla yazılır (2026-10-26). BOM'lu dosyanın üzerine Write ile yazınca BOM kalır → her commit için yeni adlı dosya (2026-10-26).
+- Bu bilgisayarda genel git kimliği yok: yeni depoda ilk commit "Author identity unknown" ile düşer → depo bazında `git config user.name "Enes Gök"` ve `git config user.email enesgok0@outlook.com` (skill deposundaki kimlik); `--global` yazılmaz. Commit mesajı dosyası PowerShell 5.1'de `Set-Content -Encoding utf8` ya da `Out-File -Encoding utf8` ile yazılırsa başına BOM girer ve konu satırı görünmez karakterle başlar → mesaj dosyası Write aracıyla yazılır (2026-10-26). BOM'lu dosyanın üzerine Write ile yazınca BOM kalır → her commit için yeni adlı dosya (2026-10-26).
 
 ## Claude Code, eklentiler ve modeller
 - `/effort xhigh` yazmak oturumluk değil kalıcıdır; oturumluk yükseltme için `/effort` → seç → `s` (2026-10-02).
@@ -69,6 +70,7 @@
 - `ANTHROPIC_BASE_URL` ile başka bir sağlayıcıya (ör. Qwen) geçmek token tasarrufu değildir: veri üçüncü tarafa gider, araç arama ve Remote Control kapanır (2026-10-02).
 - Ekranı olan projede eklenti önerisine kapalı duran tasarım skill'lerini (`ui-ux-pro-max`, `frontend-design`) de koy; Servis Takip'te unutuldu, sahip sordu (2026-10-06).
 - Sahip yavaşlıktan şikâyet etti: `settings.json`'daki kalıcı `effortLevel` `xhigh` çıktı, standart `high` diyordu. Yavaşlık ya da token şikâyetinde önce ayar dosyası belgeyle karşılaştırılır (2026-10-20).
+- `claude-usage.exe` Smart App Control ("Uygulama Denetimi ilkesi") tarafından engellendi; yedek: `node ~/.claude/olcum-tmp/haftalik.mjs` oturum kayıtlarından son 7 günü yerelde hesaplar. Ölçüm (7 gün, 313M token): %96,6 önbellekten yeniden okuma, %1 çıktı, girdinin %90'ı bağlamı 100K üstü isteklerden. Tasarruf uzun oturumu kısaltmaktan gelir, işi başka modele devretmekten değil (2026-10-27).
 
 ## Genel
 - Bir ölçüyü ölçmeden yazma: "3-4 kat tasarruf" tahmini gerçek dosyada %25-50 çıktı. Kod açıklamasına ve belgeye ölçülen sayı yazılır (2026-10-12).
